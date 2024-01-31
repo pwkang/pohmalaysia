@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.scrollbar-light ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+}
+
+.scrollbar-light ::-webkit-scrollbar-thumb {
+    background: #acacac;
+    border-radius: 20px;
+}
+
+.slick-list *:focus {
+    outline: none;
+}
