@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import Local from 'next/font/local';
 import '@styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const cnFont = Local({
+  src: './font_han_sans_cn_regular.otf',
+  display: 'swap',
+  variable: '--font-cn',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +20,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cnFont.className}
+        style={{
+          backgroundImage: `url('/img/background.jpg')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        {children}
+      </body>
     </html>
   );
 }

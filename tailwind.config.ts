@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        cn: ['黑体'],
+      },
       width: {
         xs: '20rem',
         sm: '24rem',

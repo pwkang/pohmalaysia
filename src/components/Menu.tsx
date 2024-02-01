@@ -16,7 +16,7 @@ function Menu() {
           key={item.name}
           href={item.href}
           className={cn(
-            'text-white text-center h-full flex items-center hover:bg-blue-500 transition-colors px-4 whitespace-nowrap',
+            'text-white font-medium font-cn text-center h-full flex items-center hover:bg-blue-500 transition-colors px-4 whitespace-nowrap',
             {
               'bg-blue-500': pathname === item.href,
             },
