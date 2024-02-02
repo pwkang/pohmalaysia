@@ -66,10 +66,10 @@ const presidentList: President[] = [
   },
 ];
 
-function PastPresident(props) {
+function PastPresident() {
   return (
     <Container className="mt-6 p-4">
-      <h1>历届会长</h1>
+      <h1 className="text-center">历届会长</h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
         {presidentList.map((president, index) => (
           <div

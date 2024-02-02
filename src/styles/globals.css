@@ -17,5 +17,13 @@
 }
 
 h1 {
-    @apply text-3xl text-center font-bold font-cn;
+    @apply text-3xl font-bold font-cn;
+}
+
+h5 {
+    @apply text-lg font-extrabold;
+}
+
+p {
+    @apply text-lg text-gray-600;
 }
