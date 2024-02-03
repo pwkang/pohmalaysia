@@ -8,6 +8,7 @@ import { navItems } from '@lib/navigation';
 
 function Menu() {
   const pathname = usePathname();
+  console.log('pathname:', pathname);
 
   return (
     <div className="flex flex-wrap justify-center h-full">

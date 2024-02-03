@@ -5,30 +5,30 @@ export const navItems = [
   },
   {
     name: '傅氏缘起',
-    href: 'poh-about',
+    href: '/poh-about',
   },
   {
     name: '组织结构',
-    href: 'committee',
+    href: '/committee',
   },
   {
     name: '活动相册',
-    href: 'gallery',
+    href: '/gallery',
   },
   {
     name: '活动剪报',
-    href: 'news',
+    href: '/news',
   },
   {
     name: '表格下载',
-    href: 'form',
+    href: '/form',
   },
   {
     name: '联络我们',
-    href: 'contact',
+    href: '/contact',
   },
   {
     name: '云端布告栏',
-    href: 'announcement',
+    href: '/announcement',
   },
 ];

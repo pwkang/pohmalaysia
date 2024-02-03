@@ -127,7 +127,7 @@ const associationList: Association[] = [
 function AssociationLocation() {
   return (
     <Container className="mt-6 py-4 px-0">
-      <h1>傅氏各属会</h1>
+      <h1 className="text-center">傅氏各属会</h1>
       <div className="mt-4">
         {associationList.map((association, index) => (
           <div key={index} className="py-6 px-8 odd:bg-gray-100 w-full font-cn">
