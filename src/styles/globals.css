@@ -15,3 +15,7 @@
 .slick-list *:focus {
     outline: none;
 }
+
+h1 {
+    @apply text-3xl text-center font-bold font-cn;
+}

@@ -12,7 +12,7 @@ function Layout({ children }: LayoutProps) {
     <div>
       <Banner />
       <Navbar />
-      {children}
+      <div className="mb-12">{children}</div>
       <Footer />
     </div>
   );
