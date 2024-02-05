@@ -21,7 +21,7 @@ export const navItems = [
   },
   {
     name: '表格下载',
-    href: '/form',
+    href: '/forms',
   },
   {
     name: '联络我们',

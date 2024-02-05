@@ -66,7 +66,7 @@ const presidentList: President[] = [
   },
 ];
 
-function PastPresident() {
+function PastChairman() {
   return (
     <Container className="mt-6 p-4">
       <h1 className="text-center">历届会长</h1>
@@ -77,7 +77,7 @@ function PastPresident() {
             className="flex flex-col justify-center items-center mt-6"
           >
             <Image
-              src={`/img/home/past_president/president${index + 1}.jpg`}
+              src={`/img/home/past_chairman/chairman${index + 1}.jpg`}
               alt={`${president.name}宗长`}
               width={130}
               height={170}
@@ -93,4 +93,4 @@ function PastPresident() {
   );
 }
 
-export default PastPresident;
+export default PastChairman;
