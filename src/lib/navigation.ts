@@ -17,7 +17,7 @@ export const navItems = [
   },
   {
     name: '活动剪报',
-    href: '/news',
+    href: '/newspaper',
   },
   {
     name: '表格下载',

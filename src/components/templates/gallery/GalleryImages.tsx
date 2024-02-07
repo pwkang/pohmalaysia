@@ -1,5 +1,5 @@
 import React from 'react';
-import { GalleryEvent } from './events';
+import { GalleryEvent } from './gallery';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 

@@ -1,23 +1,23 @@
 import React from 'react';
-import { galleryEvents } from './gallery';
-import Link from 'next/link';
+import { newspaper } from './newspaper';
 import Image from 'next/image';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
-function GalleryListing() {
+function NewspaperListing() {
   return (
     <div className="max-w-[90%] w-5xl m-auto mt-8">
       <h1>活动相册</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 gap-4">
-        {galleryEvents.map((event) => (
+        {newspaper.map((event) => (
           <Link
-            href={`/gallery/${event.slug}`}
+            href={`/newspaper/${event.slug}`}
             key={event.slug}
             className="group flex w-full rounded-2xl overflow-hidden flex-col"
           >
             <div className="relative w-full h-56 overflow-hidden">
               <Image
-                src={`/img/gallery/events/${event.slug}/image-${event.thumbnailIndex}.jpg`}
+                src={`/img/newspaper/${event.slug}.jpg`}
                 alt={event.title}
                 className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
                 fill
@@ -40,4 +40,4 @@ function GalleryListing() {
   );
 }
 
-export default GalleryListing;
+export default NewspaperListing;

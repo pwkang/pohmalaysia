@@ -1,26 +1,26 @@
 import React from 'react';
-import { galleryEvents } from '../../../components/templates/gallery/gallery';
 import Layout from '../../../components/layout/layout';
 import HeroSlider from '../../../components/layout/HeroSlider';
-import GalleryImages from '../../../components/templates/gallery/GalleryImages';
+import { newspaper } from '../../../components/templates/newspaper/newspaper';
+import NewspaperPage from '../../../components/templates/newspaper/NewspaperPage';
 
 function Page({ params: { slug } }) {
-  const event = galleryEvents.find((event) => event.slug === slug);
+  const news = newspaper.find((event) => event.slug === slug);
 
-  if (!event) {
+  if (!news) {
     return <Layout>Event not found</Layout>;
   }
 
   return (
     <Layout>
       <HeroSlider />
-      <GalleryImages event={event} />
+      <NewspaperPage newspaper={news} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  return galleryEvents.map((event) => ({
+  return newspaper.map((event) => ({
     slug: event.slug,
   }));
 }
