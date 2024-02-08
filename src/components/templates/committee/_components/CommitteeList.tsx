@@ -49,7 +49,10 @@ const CommitteeMap = (position: string) =>
     const committee = COMMITTEE[name];
 
     return (
-      <div className="flex flex-col items-center justify-start">
+      <div
+        className="flex flex-col items-center justify-start"
+        key={committee.name}
+      >
         <div className="w-36 mb-2">
           <Image
             src={

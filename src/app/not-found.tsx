@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/layout';
+import { defaultMetadata } from '@lib/default-metadata';
 
 function PageNotFound() {
   return (
@@ -8,5 +9,10 @@ function PageNotFound() {
     </Layout>
   );
 }
+
+export const metadata = {
+  ...defaultMetadata,
+  title: 'Page Not Found',
+};
 
 export default PageNotFound;

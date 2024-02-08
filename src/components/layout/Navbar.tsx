@@ -7,7 +7,7 @@ import MobileNav from './MobileNav';
 
 function Navbar() {
   return (
-    <div className="w-full flex justify-between px-8 md:px-16 bg-neutral-700 border-b-blue-500 border-b-4">
+    <div className="sticky top-0 z-50 w-full flex justify-between px-8 md:px-16 bg-neutral-700 border-b-blue-500 border-b-4">
       <div className="flex items-center py-3">
         <MobileNav />
       </div>

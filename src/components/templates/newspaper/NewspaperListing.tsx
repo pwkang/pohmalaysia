@@ -7,7 +7,7 @@ import Link from 'next/link';
 function NewspaperListing() {
   return (
     <div className="max-w-[90%] w-5xl m-auto mt-8">
-      <h1>活动相册</h1>
+      <h1>活动剪报</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 gap-4">
         {newspaper.map((event) => (
           <Link

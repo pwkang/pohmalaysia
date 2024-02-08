@@ -65,7 +65,10 @@ function MobileNav() {
                         className={cn(
                           'text-white w-full p-4 hover:bg-blue-500',
                           {
-                            'bg-blue-500': pathname === item.href,
+                            'bg-blue-500':
+                              pathname === item.href ||
+                              (item.href !== '/' &&
+                                pathname.startsWith(item.href)),
                           },
                         )}
                       >

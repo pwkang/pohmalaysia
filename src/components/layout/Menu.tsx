@@ -8,7 +8,6 @@ import { navItems } from '@lib/navigation';
 
 function Menu() {
   const pathname = usePathname();
-  console.log('pathname:', pathname);
 
   return (
     <div className="flex flex-wrap justify-center h-full">
@@ -19,7 +18,9 @@ function Menu() {
           className={cn(
             'text-white font-medium font-cn text-center h-full flex items-center hover:bg-blue-500 transition-colors px-4 whitespace-nowrap',
             {
-              'bg-blue-500': pathname === item.href,
+              'bg-blue-500':
+                pathname === item.href ||
+                (item.href !== '/' && pathname.startsWith(item.href)),
             },
           )}
         >
