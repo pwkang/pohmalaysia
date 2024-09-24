@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import config from '@lib/config';
+import { __PROD__ } from '@lib/utils';
 
 export const defaultMetadata: Metadata = {
   title: '马来西亚傅氏总会',
@@ -10,6 +11,10 @@ export const defaultMetadata: Metadata = {
     'Poh Association of Malaysia',
     'Poh Association',
   ],
+  robots: {
+    index: __PROD__,
+    follow: __PROD__,
+  },
   metadataBase: new URL(config.websiteUrl),
   openGraph: {
     title: '马来西亚傅氏总会',
