@@ -5,7 +5,7 @@ export const navItems = [
   },
   {
     name: '傅氏缘起',
-    href: '/about-us',
+    href: '/poh-origin',
   },
   {
     name: '组织结构',

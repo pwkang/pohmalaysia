@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/poh-about',
-        destination: '/about-us',
+        destination: '/poh-origin',
         permanent: true,
       },
     ];
