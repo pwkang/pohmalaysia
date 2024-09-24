@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Local from 'next/font/local';
 import '@styles/globals.css';
+import Scripts from '../components/templates/scripts';
 
 const cnFont = Local({
   src: './font_han_sans_cn_regular.otf',
@@ -20,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Scripts />
+      </head>
       <body
         className={cnFont.className}
         style={{
