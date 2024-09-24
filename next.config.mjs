@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'poh-cdn.pwkang.com',
+        hostname: 'cdn.pohmalaysia.com',
       },
     ],
   },

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { fetchBodPage } from '../../../api/bod';
 import Container from '../../Container';
 import Image from 'next/image';
+import config from '@lib/config';
 
 interface BodListingProps {
   slug: string;
@@ -34,7 +35,7 @@ async function BodListing({ slug }: BodListingProps) {
                   <div className="relative w-48 h-56">
                     <Image
                       alt={member.avatar?.alt}
-                      src={member.avatar?.url}
+                      src={member.avatar?.url || config.noAvatarUrl}
                       fill
                       className="object-cover"
                     />
