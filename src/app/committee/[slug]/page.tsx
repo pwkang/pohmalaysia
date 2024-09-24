@@ -16,4 +16,12 @@ function Page({ params: { slug } }: PageProps) {
   );
 }
 
+const slugs = ['general', 'youth-group', 'women-group'];
+
+export function generateStaticParams() {
+  return slugs.map((slug) => ({
+    slug,
+  }));
+}
+
 export default Page;
