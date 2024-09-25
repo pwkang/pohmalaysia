@@ -31,3 +31,26 @@ export const fetchBodPage = async (slug: string) => {
 
   return councils.bodPages[0] as BodPage;
 };
+
+export const fetchBodSlugs = async () => {
+  const bodSlugs = await fetchStrapi(gql`
+    query BodPages {
+      bodPages {
+        slug
+      }
+    }
+  `);
+
+  return bodSlugs.bodPages.map((page) => page.slug) as string[];
+};
+
+export const getBodPageMetadata = async (slug: string) => {
+  const bodPage = await fetchStrapi(gql`
+    query BodPages {
+      bodPages(filters: { slug: { eq: "${slug}" } }) {
+        metaTitle
+        metaDescription
+      }
+    }`);
+  return bodPage.bodPages[0] as Pick<BodPage, 'metaDescription' | 'metaTitle'>;
+};

@@ -9,6 +9,8 @@ interface Committee {
 export interface BodPage {
   name: string;
   slug: string;
+  metaTitle: string;
+  metaDescription: string;
   bods: Bod[];
 }
 
