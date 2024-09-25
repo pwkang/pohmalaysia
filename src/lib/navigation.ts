@@ -9,7 +9,20 @@ export const navItems = [
   },
   {
     name: '组织结构',
-    href: '/committee',
+    items: [
+      {
+        name: '理事会',
+        href: '/committee/general',
+      },
+      {
+        name: '青年团',
+        href: '/committee/youth-group',
+      },
+      {
+        name: '妇女组',
+        href: '/committee/women-group',
+      },
+    ],
   },
   {
     name: '活动相册',
