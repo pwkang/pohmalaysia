@@ -32,7 +32,7 @@ async function BodListing({ slug }: BodListingProps) {
                   className="rounded-xl overflow-hidden shadow-lg"
                   key={`member-${member.name}`}
                 >
-                  <div className="relative w-48 h-56">
+                  <div className="relative w-40 h-48">
                     <Image
                       alt={member.avatar?.alt}
                       src={member.avatar?.url || config.noAvatarUrl}
