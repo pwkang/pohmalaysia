@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Local from 'next/font/local';
 import '@styles/globals.css';
 import Scripts from '../components/templates/scripts';
+import { links } from '@lib/links';
 
 const cnFont = Local({
   src: './font_han_sans_cn_regular.otf',
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body
         className={cnFont.className}
         style={{
-          backgroundImage: `url('/img/background.jpg')`,
+          backgroundImage: `url('${links.background}')`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',

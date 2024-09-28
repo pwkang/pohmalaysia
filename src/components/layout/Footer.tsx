@@ -1,19 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
+import { links } from '@lib/links';
 
 function Footer() {
   return (
     <div className="flex justify-between px-8 py-4">
       <div className="flex gap-16">
         <Image
-          src="/img/logo1.png"
+          src={links.logo}
           alt="Poh association Malaysia logo"
           width={123}
           height={122}
           className="object-contain"
         />
         <Image
-          src="/img/logo2.png"
+          src={links.pohLogo}
           alt="Poh association Malaysia logo"
           width={119}
           height={118}

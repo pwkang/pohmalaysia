@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { links } from '@lib/links';
 
 function Banner() {
   return (
@@ -7,7 +8,7 @@ function Banner() {
       <div className="bg-[#f3f9fe] w-full flex justify-center">
         <div className="relative w-2xl">
           <Image
-            src="/img/brand_banner.png"
+            src={links.banner}
             alt="Poh association Malaysia image"
             className="object-contain"
             width={654}
