@@ -1,8 +1,12 @@
 import React from 'react';
-import { galleryEvents } from '../../../components/templates/gallery/gallery';
 import Layout from '../../../components/layout/layout';
 import HeroSlider from '../../../components/layout/HeroSlider';
 import GalleryImages from '../../../components/templates/gallery/GalleryImages';
+import {
+  fetchGallery,
+  fetchGalleryMetadata,
+  fetchGallerySlugs,
+} from '../../../api/gallery';
 
 interface PageProps {
   params: {
@@ -10,32 +14,37 @@ interface PageProps {
   };
 }
 
-function Page({ params: { slug } }) {
-  const event = galleryEvents.find((event) => event.slug === slug);
+async function Page({ params: { slug } }) {
+  const gallery = await fetchGallery(slug);
 
-  if (!event) {
+  if (!gallery) {
     return <Layout>Event not found</Layout>;
   }
 
   return (
     <Layout>
       <HeroSlider />
-      <GalleryImages event={event} />
+      <GalleryImages
+        title={gallery.title}
+        date={gallery.date}
+        images={gallery.images}
+      />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  return galleryEvents.map((event) => ({
-    slug: event.slug,
+  const slugs = await fetchGallerySlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const event = galleryEvents.find((event) => event.slug === params.slug);
+  const metadata = await fetchGalleryMetadata(params.slug);
 
   return {
-    title: `${event?.title} | 马来西亚傅氏总会`,
+    title: `${metadata?.metaTitle} | 马来西亚傅氏总会`,
   };
 }
 
