@@ -15,6 +15,14 @@ export const defaultMetadata: Metadata = {
     index: __PROD__,
     follow: __PROD__,
   },
+  icons: [
+    {
+      type: 'image/png',
+      rel: 'icon',
+      sizes: '16x16',
+      url: `/favicon.ico`,
+    },
+  ],
   metadataBase: new URL(config.websiteUrl),
   openGraph: {
     title: '马来西亚傅氏总会',
