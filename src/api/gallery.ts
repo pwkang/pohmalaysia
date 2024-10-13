@@ -47,7 +47,7 @@ export const fetchGallerySlugs = async () => {
 export const listAllGalleries = async () => {
   const galleries = await fetchStrapi(gql`
     query Gallery {
-      galleries(sort: ["date"]) {
+      galleries(sort: ["date"], pagination: { limit: 500 }) {
         slug
         title
         date
