@@ -3,6 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
+  const headers = request.headers;
+
+  const authorization = headers.get('authorization');
+
+  if (authorization !== process.env.STRAPI_WEBHOOK_SECRET) {
+    return NextResponse.json({ revalidated: false, now: Date.now() });
+  }
 
   if (data.event !== 'entry.publish')
     return NextResponse.json({ revalidated: false, now: Date.now() });
@@ -20,6 +27,7 @@ export async function POST(request: NextRequest) {
 
   for (const path of paths) {
     await revalidatePath(path);
+    console.log(`Revalidated ${path}`);
   }
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
