@@ -8,7 +8,7 @@ import { defaultMetadata } from '@lib/default-metadata';
 function Page() {
   return (
     <Layout>
-      <HeroSlider />;
+      <HeroSlider />
       <ContactInfo />
     </Layout>
   );

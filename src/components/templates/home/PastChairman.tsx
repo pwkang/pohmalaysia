@@ -64,6 +64,12 @@ const presidentList: President[] = [
     term: '第19届至第23届',
     year: '(2011 – 2023)',
   },
+  {
+    placeString: '第十任',
+    name: '桂洋宗长',
+    term: '第24届',
+    year: '(2023 – 2026)',
+  }
 ];
 
 function PastChairman() {
