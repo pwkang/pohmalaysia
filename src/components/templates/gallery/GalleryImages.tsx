@@ -1,17 +1,16 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import ReactSlick from 'react-slick';
 import * as Dialog from '@radix-ui/react-dialog';
 import { motion } from 'framer-motion';
 import { IoClose, IoChevronBack, IoChevronForward } from 'react-icons/io5';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-// Helper function to convert original URL to thumbnail URL
-const getThumbnailUrl = (url: string): string => {
+// Helper function to get thumbnail URL - kept for reference
+// We're now using original images with lazy loading for the grid
+// but we might still use thumbnails in other places
+export const getThumbnailUrl = (url: string): string => {
   if (!url) return '';
   const urlParts = url.split('/');
   const filename = urlParts.pop() || '';
@@ -27,95 +26,77 @@ interface GalleryImagesProps {
 }
 
 function GalleryImages({ title, images, date }: GalleryImagesProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const sliderRef = useRef<ReactSlick>(null);
-  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
-  const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [thumbnailsLoaded, setThumbnailsLoaded] = useState<Record<number, boolean>>({});
+  const [originalImagesLoaded, setOriginalImagesLoaded] = useState<Record<number, boolean>>({});
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
+  const [visibleImages, setVisibleImages] = useState<Record<number, boolean>>({});
 
-  // Reset thumbnail refs array when images change
+  // Create refs for each image container to observe visibility
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleThumbnailLoad = useCallback((index: number) => {
+    setThumbnailsLoaded(prev => ({ ...prev, [index]: true }));
+  }, []);
+
+  const handleOriginalImageLoad = useCallback((index: number) => {
+    setOriginalImagesLoaded(prev => ({ ...prev, [index]: true }));
+  }, []);
+
+  // Update modal image loaded state when current image changes or modal opens
   useEffect(() => {
-    thumbnailRefs.current = thumbnailRefs.current.slice(0, images.length);
-  }, [images.length]);
-
-  // Scroll to keep current thumbnail in view
-  useEffect(() => {
-    const currentThumbnail = thumbnailRefs.current[currentSlide];
-    const container = thumbnailContainerRef.current;
-
-    if (currentThumbnail && container) {
-      // Get the position of the current thumbnail
-      const thumbnailRect = currentThumbnail.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-
-      // Calculate the scroll position to center the current thumbnail
-      const thumbnailLeft = thumbnailRect.left;
-      const thumbnailWidth = thumbnailRect.width;
-      const containerLeft = containerRect.left;
-      const containerWidth = containerRect.width;
-
-      // Calculate the ideal position where the thumbnail would be centered
-      const idealLeft = containerLeft + (containerWidth - thumbnailWidth) / 2;
-      const scrollOffset = thumbnailLeft - idealLeft;
-
-      // Smooth scroll to the calculated position
-      container.scrollBy({
-        left: scrollOffset,
-        behavior: 'smooth'
-      });
-    }
-  }, [currentSlide]);
-
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    beforeChange: (_: number, next: number) => setCurrentSlide(next),
-    arrows: true,
-    swipe: true,
-    swipeToSlide: true,
-    touchThreshold: 10,
-    adaptiveHeight: true,
-    responsive: [
-      {
-        breakpoint: 640, // sm breakpoint
-        settings: {
-          arrows: false,
-        }
+    if (modalOpen) {
+      // If the original image is already loaded in the grid, use that state
+      // Otherwise, we'll need to load it in the modal
+      if (originalImagesLoaded[currentImage]) {
+        setModalImageLoaded(true);
+      } else {
+        setModalImageLoaded(false);
       }
-    ],
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
-  };
+    }
+  }, [currentImage, modalOpen, originalImagesLoaded]);
 
-  // Custom arrow components for better mobile experience
-  function NextArrow(props: { onClick?: React.MouseEventHandler<HTMLButtonElement> }) {
-    const { onClick } = props;
-    return (
-      <button
-        onClick={onClick}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-md hidden sm:block"
-        aria-label="Next slide"
-      >
-        <IoChevronForward size={24} />
-      </button>
-    );
-  }
+  // Set up intersection observer for lazy loading
+  useEffect(() => {
+    // Reset refs array when images change
+    imageRefs.current = imageRefs.current.slice(0, images.length);
 
-  function PrevArrow(props: { onClick?: React.MouseEventHandler<HTMLButtonElement> }) {
-    const { onClick } = props;
-    return (
-      <button
-        onClick={onClick}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-md hidden sm:block"
-        aria-label="Previous slide"
-      >
-        <IoChevronBack size={24} />
-      </button>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          // Get the index from the data attribute
+          const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+
+          if (entry.isIntersecting) {
+            // Mark this image as visible
+            setVisibleImages(prev => ({ ...prev, [index]: true }));
+            // Once the image is visible, we don't need to observe it anymore
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null, // Use the viewport as the root
+        rootMargin: '200px', // Start loading images when they're 200px from entering the viewport
+        threshold: 0.1 // Trigger when at least 10% of the element is visible
+      }
     );
-  }
+
+    // Observe all image containers
+    imageRefs.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      // Clean up the observer when the component unmounts
+      imageRefs.current.forEach(ref => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [images.length]);
 
   return (
     <div className="mt-8">
@@ -127,69 +108,64 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       </p>
 
       <div className="max-w-[95%] md:max-w-[90%] w-5xl m-auto mt-8 mb-16">
-        {/* Main Slider */}
-        <div className="relative">
-          <ReactSlick ref={sliderRef} {...sliderSettings}>
-            {images.map((image, index) => (
-              <div key={index} className="outline-none">
-                <div
-                  className="relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[32rem] cursor-pointer"
-                  onClick={() => setModalOpen(true)}
-                >
-                  <Image
-                    src={image.url}
-                    alt={`Image ${index + 1}`}
-                    className="object-contain"
-                    fill
-                  />
-                </div>
-              </div>
-            ))}
-          </ReactSlick>
-        </div>
-
-        {/* Thumbnail Grid */}
-        <div className="relative mt-6">
-          {/* Scroll indicators */}
-          <div
-            ref={thumbnailContainerRef}
-            className="flex justify-center overflow-x-auto pb-2 scroll-smooth px-4 md:px-8 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
-          >
+        {/* Image Grid Gallery - Pinterest Style with Lazy Loading */}
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {images.map((image, index) => {
-            // Calculate distance from current slide (accounting for wrap-around)
-            const distance = Math.min(
-              Math.abs(index - currentSlide),
-              Math.abs(index - currentSlide + images.length),
-              Math.abs(index - currentSlide - images.length)
-            );
+            // Generate a random aspect ratio for Pinterest-like effect
+            // This creates a more dynamic, masonry-style layout
+            const aspectRatio = [3/4, 4/3, 1, 5/4, 4/5, 9/16, 16/9][index % 7];
+            const paddingTop = `${(1 / aspectRatio) * 100}%`;
 
-            // Only show thumbnails that are within 3 positions of current slide
-            const isVisible = distance <= 3;
+            // Determine if this image should be loaded
+            // Load the first 4 images immediately, and others when they become visible
+            const shouldLoad = index < 4 || visibleImages[index];
 
             return (
               <div
                 key={index}
-                ref={el => thumbnailRefs.current[index] = el}
-                className={`relative h-16 sm:h-20 min-w-[64px] sm:min-w-[80px] mx-1.5 cursor-pointer transition-all duration-300 ${
-                  currentSlide === index ? 'ring-2 ring-blue-500 opacity-100 scale-110 z-10' : 'opacity-60 hover:opacity-90'
-                } ${isVisible ? 'block' : 'hidden'}`}
+                ref={el => imageRefs.current[index] = el}
+                data-index={index}
+                className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group break-inside-avoid mb-4"
                 onClick={() => {
-                  setCurrentSlide(index);
-                  if (sliderRef.current) {
-                    sliderRef.current.slickGoTo(index);
-                  }
+                  setCurrentImage(index);
+                  setModalOpen(true);
                 }}
               >
-                <Image
-                  src={getThumbnailUrl(image.url)}
-                  alt={`Thumbnail ${index + 1}`}
-                  className="object-cover"
-                  fill
-                />
+                <div className="relative w-full" style={{ paddingTop }}>
+                  {/* Show a placeholder while no image is loaded */}
+                  {!thumbnailsLoaded[index] && !shouldLoad && (
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                  )}
+
+                  {/* Show thumbnail first */}
+                  <Image
+                    src={getThumbnailUrl(image.url)}
+                    alt={`Thumbnail ${index + 1}`}
+                    className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-0' : 'opacity-100'}`}
+                    fill
+                    onLoad={() => handleThumbnailLoad(index)}
+                    priority={index < 8} // Prioritize loading more thumbnails since they're smaller
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    style={{ objectFit: 'cover' }}
+                  />
+
+                  {/* Load original image when in viewport */}
+                  {shouldLoad && (
+                    <Image
+                      src={image.url}
+                      alt={`Image ${index + 1}`}
+                      className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
+                      fill
+                      onLoad={() => handleOriginalImageLoad(index)}
+                      priority={index < 4} // Prioritize loading only the first 4 original images
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  )}
+                </div>
               </div>
             );
           })}
-          </div>
         </div>
       </div>
 
@@ -219,13 +195,38 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                   >
                     <IoClose size={24} />
                   </button>
-                  <Image
-                    src={images[currentSlide].url}
-                    alt={`Full size ${currentSlide + 1}`}
-                    className="max-h-[80vh] w-auto object-contain mx-auto"
-                    width={1920}
-                    height={1080}
-                  />
+                  {/* Progressive loading for modal image */}
+                  <div className="relative w-full flex justify-center items-center">
+                    {/* First show thumbnail in modal while original loads */}
+                    {!modalImageLoaded && (
+                      <Image
+                        src={getThumbnailUrl(images[currentImage].url)}
+                        alt={`Thumbnail ${currentImage + 1}`}
+                        className="max-h-[80vh] w-auto transition-all duration-300"
+                        width={1280}
+                        height={720}
+                        priority={true}
+                        style={{ position: 'absolute', objectFit: 'contain' }}
+                      />
+                    )}
+
+                    {/* Then load and show the full-size image */}
+                    <Image
+                      src={images[currentImage].url}
+                      alt={`Full size ${currentImage + 1}`}
+                      className={`max-h-[80vh] w-auto transition-all duration-500 ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                      width={1920}
+                      height={1080}
+                      onLoad={() => {
+                        // Update both modal state and grid state
+                        setModalImageLoaded(true);
+                        setOriginalImagesLoaded(prev => ({ ...prev, [currentImage]: true }));
+                      }}
+                      quality={90} /* Higher quality for modal view */
+                      priority={true} /* Always prioritize the modal image */
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
 
                   {/* Modal Navigation Controls */}
                   <div
@@ -235,11 +236,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        const prevSlide = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
-                        setCurrentSlide(prevSlide);
-                        if (sliderRef.current) {
-                          sliderRef.current.slickGoTo(prevSlide);
-                        }
+                        const prevImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
+                        setCurrentImage(prevImage);
                       }}
                       className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
                       aria-label="Previous image"
@@ -248,17 +246,14 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     </button>
 
                     <div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-                      {currentSlide + 1} / {images.length}
+                      {currentImage + 1} / {images.length}
                     </div>
 
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        const nextSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
-                        setCurrentSlide(nextSlide);
-                        if (sliderRef.current) {
-                          sliderRef.current.slickGoTo(nextSlide);
-                        }
+                        const nextImage = currentImage === images.length - 1 ? 0 : currentImage + 1;
+                        setCurrentImage(nextImage);
                       }}
                       className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
                       aria-label="Next image"
