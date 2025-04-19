@@ -10,6 +10,14 @@ import { IoClose, IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+// Helper function to convert original URL to thumbnail URL
+const getThumbnailUrl = (url: string): string => {
+  if (!url) return '';
+  const urlParts = url.split('/');
+  const filename = urlParts.pop() || '';
+  return [...urlParts, `thumbnail_${filename}`].join('/');
+};
+
 interface GalleryImagesProps {
   title: string;
   date: string;
@@ -173,7 +181,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                 }}
               >
                 <Image
-                  src={image.url}
+                  src={getThumbnailUrl(image.url)}
                   alt={`Thumbnail ${index + 1}`}
                   className="object-cover"
                   fill
