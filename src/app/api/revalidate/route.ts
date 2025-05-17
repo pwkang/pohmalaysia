@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
 
   switch (data.model) {
     case 'gallery':
+      paths.push(`/gallery`);
       paths.push(`/gallery/${data.entry.slug}`);
       break;
     case 'bod-page':
