@@ -11,6 +11,10 @@ export const navItems = [
         href: '/poh-origin',
       },
       {
+        name: '总会简史',
+        href: '/history',
+      },
+      {
         name: '历届会长',
         href: '/past-chairman',
       }

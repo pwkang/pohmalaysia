@@ -137,39 +137,6 @@ function PastChairmanListing() {
               </div>
 
               <p className="text-gray-600 mb-6">{currentChairman.bio}</p>
-
-              {/* Additional information about current chairman */}
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-indigo-50 rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h4 className="font-bold text-indigo-900 text-sm">贡献与成就</h4>
-                  </div>
-                  <p className="text-indigo-800/80 text-sm">
-                    在{currentChairman.name}的领导下，马来西亚傅氏公会取得了显著的发展与进步。
-                    他的奉献精神与领导才能为公会的壮大做出了重要贡献。
-                  </p>
-                </div>
-
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                    </div>
-                    <h4 className="font-bold text-blue-900 text-sm">历史地位</h4>
-                  </div>
-                  <p className="text-blue-800/80 text-sm">
-                    作为第{currentChairman.placeString.replace('第', '').replace('任', '')}位会长，
-                    {currentChairman.name}在马来西亚傅氏公会的历史上占有重要地位。
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
