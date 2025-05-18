@@ -10,24 +10,37 @@ import { HiChevronDown } from 'react-icons/hi';
 interface NavItemProps {
   name: string;
   href: string;
+  scrolled: boolean;
 }
 
-function NavItem({ name, href }: NavItemProps) {
+function NavItem({ name, href, scrolled }: NavItemProps) {
   const pathname = usePathname();
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
 
   return (
     <Link
-      key={name}
       href={href}
       className={cn(
-        'text-white font-medium font-cn text-center h-full flex items-center hover:bg-blue-500 transition-colors px-4 whitespace-nowrap',
+        'font-medium font-cn text-center flex items-center transition-all duration-300 px-4 py-2 mx-1 whitespace-nowrap text-sm relative group',
         {
-          'bg-blue-500':
-            pathname === href || (href !== '/' && pathname.startsWith(href)),
+          // Light mode (scrolled)
+          'text-blue-900': scrolled && isActive,
+          'text-neutral-700 hover:text-blue-700': scrolled && !isActive,
+
+          // Dark mode (not scrolled)
+          'text-white': !scrolled && isActive,
+          'text-white/90 hover:text-white': !scrolled && !isActive,
         },
       )}
     >
       {name}
+      <span className={cn(
+        'absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300',
+        {
+          'bg-blue-500 scale-x-100': isActive,
+          'bg-blue-400': !isActive,
+        }
+      )} />
     </Link>
   );
 }
@@ -38,53 +51,94 @@ interface NavDropdownProps {
     name: string;
     href: string;
   }[];
+  scrolled: boolean;
 }
 
-function NavDropdown({ items, name }: NavDropdownProps) {
+function NavDropdown({ items, name, scrolled }: NavDropdownProps) {
   const pathname = usePathname();
+  const isActive = items.some((item) => pathname === item.href);
 
   return (
-    <div className="group relative cursor-pointer">
+    <div className="group relative">
       <div
         className={cn(
-          'text-white gap-2 font-medium font-cn text-center h-full flex items-center group-hover:bg-blue-500 transition-colors px-4 whitespace-nowrap',
+          'font-medium font-cn text-center flex items-center transition-all duration-300 px-4 py-2 mx-1 gap-1 whitespace-nowrap text-sm cursor-pointer relative group',
           {
-            'bg-blue-500': items.some((item) => pathname === item.href),
+            // Light mode (scrolled)
+            'text-blue-900': scrolled && isActive,
+            'text-neutral-700 hover:text-blue-700': scrolled && !isActive,
+
+            // Dark mode (not scrolled)
+            'text-white': !scrolled && isActive,
+            'text-white/90 hover:text-white': !scrolled && !isActive,
           },
         )}
       >
         <span>{name}</span>
-        <HiChevronDown />
+        <HiChevronDown className="transition-transform duration-300 group-hover:rotate-180" />
+        <span className={cn(
+          'absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300',
+          {
+            'bg-blue-500 scale-x-100': isActive,
+            'bg-blue-400': !isActive,
+          }
+        )} />
       </div>
-      <div className="group-hover:block w-full hidden transition absolute bottom-0 left-0 translate-y-full pt-1 shadow-md rounded-sm">
-        <div className="bg-neutral-700">
-          {items.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={cn('block px-6 py-3 hover:bg-blue-500 text-white', {
-                'bg-blue-500': pathname === item.href,
-              })}
-            >
-              {item.name}
-            </Link>
-          ))}
+      <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute left-0 pt-2 min-w-[200px] z-50">
+        <div className={cn(
+          'rounded-lg shadow-xl overflow-hidden border',
+          scrolled ? 'bg-white/95 backdrop-blur-sm border-gray-100' : 'bg-white/10 backdrop-blur-md border-white/10'
+        )}>
+          {items.map((item) => {
+            const isItemActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  'block px-6 py-3 transition-all duration-300 text-sm relative group/item',
+                  {
+                    // Light mode (scrolled)
+                    'text-blue-900 bg-blue-50': scrolled && isItemActive,
+                    'text-neutral-700 hover:bg-gray-50 hover:text-blue-700': scrolled && !isItemActive,
+
+                    // Dark mode (not scrolled)
+                    'text-white bg-white/20': !scrolled && isItemActive,
+                    'text-white/90 hover:bg-white/10 hover:text-white': !scrolled && !isItemActive,
+                  }
+                )}
+              >
+                <span className="relative z-10">{item.name}</span>
+                <span className={cn(
+                  'absolute left-0 top-0 h-full w-1 bg-blue-500 transition-all duration-300',
+                  {
+                    'opacity-100': isItemActive,
+                    'opacity-0 group-hover/item:opacity-100': !isItemActive,
+                  }
+                )} />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-function Menu() {
+interface MenuProps {
+  scrolled: boolean;
+}
+
+function Menu({ scrolled }: MenuProps) {
   return (
-    <div className="flex flex-wrap justify-center h-full gap-[1px]">
+    <div className="flex items-center justify-center">
       {navItems.map((item) => {
         if (item.href) {
-          return <NavItem key={item.name} href={item.href} name={item.name} />;
+          return <NavItem key={item.name} href={item.href} name={item.name} scrolled={scrolled} />;
         }
         if (item.items) {
           return (
-            <NavDropdown key={item.name} name={item.name} items={item.items} />
+            <NavDropdown key={item.name} name={item.name} items={item.items} scrolled={scrolled} />
           );
         }
       })}
