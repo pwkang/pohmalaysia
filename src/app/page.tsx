@@ -11,10 +11,12 @@ export default function Home() {
   return (
     <Layout>
       <HeroSlider />
-      <History />
-      <PastChairman />
-      <AssociationLocation />
-      <DonationReport />
+      <div className="container mx-auto px-4">
+        <History />
+        <PastChairman />
+        <AssociationLocation />
+        <DonationReport />
+      </div>
     </Layout>
   );
 }

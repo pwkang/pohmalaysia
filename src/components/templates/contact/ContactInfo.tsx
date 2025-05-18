@@ -33,7 +33,7 @@ function ContactInfo() {
               <FaPhone className="text-blue-600 flex-shrink-0" />
               <p className="text-gray-700">
                 <span className="font-semibold">Contact: </span>
-                016-3326088 (Eve)
+                {config.phone} (Eve)
               </p>
             </div>
 
@@ -41,8 +41,8 @@ function ContactInfo() {
               <FaEnvelope className="text-blue-600 flex-shrink-0" />
               <p className="text-gray-700">
                 <span className="font-semibold">Email: </span>
-                <a href="mailto:pohmalaysia1975@gmail.com" className="text-blue-600 hover:underline">
-                  pohmalaysia1975@gmail.com
+                <a href={`mailto:${config.email}`} className="text-blue-600 hover:underline">
+                  {config.email}
                 </a>
               </p>
             </div>

@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         cn: ['黑体'],
+        sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
       },
       width: {
         xs: '20rem',
@@ -39,6 +40,11 @@ const config: Config = {
       animation: {
         slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
         slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+      },
+      textShadow: {
+        sm: '0 1px 2px rgba(0, 0, 0, 0.3)',
+        DEFAULT: '0 2px 4px rgba(0, 0, 0, 0.3)',
+        lg: '0 8px 16px rgba(0, 0, 0, 0.3)',
       },
     },
   },
