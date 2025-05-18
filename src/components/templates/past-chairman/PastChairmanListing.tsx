@@ -1,9 +1,5 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { cn } from '@lib/utils';
 
 interface President {
   placeString: string;
@@ -87,194 +83,150 @@ const presidentList: President[] = [
 ];
 
 function PastChairmanListing() {
-  const [selectedChairman, setSelectedChairman] = useState<President | null>(null);
+  // Get current chairman (last in the list)
+  const currentChairman = presidentList[presidentList.length - 1];
+  // Get past chairmen (all except the last one, in reverse order)
+  const pastChairmen = [...presidentList.slice(0, -1)].reverse();
 
   return (
     <div className="container mx-auto px-4 py-16">
-      {/* Header section with title and description */}
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold mb-6 font-cn">历届会长</h1>
-        <p className="text-gray-600 max-w-3xl mx-auto">
+      {/* Modern header section */}
+      <div className="mb-16">
+        <h1 className="text-4xl font-bold mb-2 font-cn bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">历届会长</h1>
+        <p className="text-gray-600 max-w-3xl">
           自1975年马来西亚傅氏公会成立以来，历届会长带领公会不断发展壮大，为宗亲服务，传承傅氏精神。
-          以下是历届担任会长职务的宗长，他们的贡献与付出让我们永远铭记。
         </p>
       </div>
 
-      {/* Vertical Timeline */}
-      <div className="relative max-w-6xl mx-auto">
-        {/* Center line - positioned behind everything */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full z-0"></div>
+      {/* Current Chairman Feature Section */}
+      <div className="mb-20">
+        <div className="flex items-center mb-8">
+          <h2 className="text-2xl font-bold font-cn text-gray-800">现任会长</h2>
+          <div className="h-[1px] bg-gradient-to-r from-indigo-500 to-transparent flex-grow ml-4"></div>
+        </div>
 
-        {/* Timeline items */}
-        <div className="space-y-12">
-          {presidentList.map((president, index) => (
-            <motion.div
-              key={president.year}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={cn(`relative flex items-center md:flex-row-reverse md:even:flex-row`,
-                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-              )}
-            >
-              {/* Timeline dot - positioned behind the card */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full bg-white border-4 border-indigo-600 z-0"></div>
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row">
+            {/* Image section */}
+            <div className="md:w-1/3 bg-gradient-to-br from-indigo-50 to-blue-50 p-8 flex items-center justify-center">
+              <div className="relative w-48 h-64 overflow-hidden">
+                <Image
+                  src={`/img/home/past_chairman/chairman${presidentList.length}.jpg`}
+                  alt={`${currentChairman.name}宗长`}
+                  width={240}
+                  height={320}
+                  className="object-contain"
+                  style={{ objectPosition: 'center top' }}
+                />
+              </div>
+            </div>
 
-              {/* Year marker - also positioned behind the card */}
-              <div className={cn(`absolute left-1/2 transform -translate-x-1/2 md:mb-0 md:mt-0 md:left-auto md:right-1/2 md:translate-x-0 md:mr-8 md:even:mr-0 md:even:ml-8 md:even:left-1/2 z-0`,
-                index % 2 === 0 ? 'md:mr-auto mt-8' : 'md:ml-auto mb-8'
-              )}
-              >
-                <div className="bg-indigo-100 text-indigo-800 font-bold py-1 px-3 rounded-full text-sm whitespace-nowrap">
-                  {president.year}
+            {/* Content section */}
+            <div className="md:w-2/3 p-8">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <h3 className="text-3xl font-bold font-cn text-gray-800">{currentChairman.name}</h3>
+                <div className="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm font-medium rounded-full">
+                  {currentChairman.placeString}
+                </div>
+                <div className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full">
+                  {currentChairman.term}
+                </div>
+                <div className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                  {currentChairman.year}
                 </div>
               </div>
 
-              {/* Content card - with higher z-index to appear in front of the dot */}
-              <div className={cn(`w-full md:w-[calc(50%-2rem)] bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative z-10`,
-                index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'
-              )}
-                onClick={() => setSelectedChairman(president)}>
-                <div className="flex flex-col md:flex-row">
+              <p className="text-gray-600 mb-6">{currentChairman.bio}</p>
+
+              {/* Additional information about current chairman */}
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-indigo-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-indigo-900 text-sm">贡献与成就</h4>
+                  </div>
+                  <p className="text-indigo-800/80 text-sm">
+                    在{currentChairman.name}的领导下，马来西亚傅氏公会取得了显著的发展与进步。
+                    他的奉献精神与领导才能为公会的壮大做出了重要贡献。
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                    </div>
+                    <h4 className="font-bold text-blue-900 text-sm">历史地位</h4>
+                  </div>
+                  <p className="text-blue-800/80 text-sm">
+                    作为第{currentChairman.placeString.replace('第', '').replace('任', '')}位会长，
+                    {currentChairman.name}在马来西亚傅氏公会的历史上占有重要地位。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Past Chairmen Section */}
+      <div>
+        <div className="flex items-center mb-8">
+          <h2 className="text-2xl font-bold font-cn text-gray-800">历届会长</h2>
+          <div className="h-[1px] bg-gradient-to-r from-indigo-500 to-transparent flex-grow ml-4"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pastChairmen.map((president) => (
+            <div
+              key={president.year}
+              className="group"
+            >
+              <div
+                className="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-all duration-300 h-full flex flex-col"
+              >
+                <div className="p-5 flex items-start gap-4">
                   {/* Image */}
-                  <div className="relative h-64 md:h-auto">
-                    <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-gray-100">
+                  <div className="flex-shrink-0">
+                    <div className="relative w-20 h-24 overflow-hidden bg-gray-50 rounded">
                       <Image
-                        src={`/img/home/past_chairman/chairman${index + 1}.jpg`}
+                        src={`/img/home/past_chairman/chairman${presidentList.findIndex(p => p.name === president.name) + 1}.jpg`}
                         alt={`${president.name}宗长`}
-                        width={200}
-                        height={260}
-                        className="object-contain transition-transform duration-500 hover:scale-105"
+                        width={100}
+                        height={120}
+                        className="object-contain"
                         style={{ objectPosition: 'center top' }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80 md:hidden"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4 text-white md:hidden">
-                        <p className="text-sm opacity-80">{president.placeString}</p>
-                        <h3 className="text-xl font-bold font-cn">{president.name}</h3>
-                        <p className="text-sm opacity-80">{president.term}</p>
-                      </div>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="md:w-2/3 p-6">
-                    <div className="hidden md:block">
-                      <p className="text-indigo-600 font-medium">{president.placeString}</p>
-                      <h3 className="text-2xl font-bold font-cn mb-1">{president.name}</h3>
-                      <p className="text-gray-500 mb-4">{president.term}</p>
-                    </div>
-                    <p className="text-gray-600 line-clamp-3 md:line-clamp-none">{president.bio}</p>
-                    <button className="mt-4 text-indigo-600 font-medium hover:text-indigo-800 flex items-center">
-                      查看详情
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Modal for chairman details */}
-      {selectedChairman && (
-        <div
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedChairman(null)}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative">
-              <button
-                className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full p-2 text-gray-800 hover:bg-white z-10"
-                onClick={() => setSelectedChairman(null)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              <div className="flex flex-col">
-                {/* Header with image and basic info */}
-                <div className="flex flex-col md:flex-row">
-                  {/* Image section */}
-                  <div className="md:w-1/3 bg-gray-100 flex items-center justify-center p-8">
-                    <div className="relative w-full max-w-[300px]">
-                      <Image
-                        src={`/img/home/past_chairman/chairman${presidentList.findIndex(p => p.name === selectedChairman.name) + 1}.jpg`}
-                        alt={`${selectedChairman.name}宗长`}
-                        width={300}
-                        height={400}
-                        className="object-contain mx-auto"
-                        style={{ objectPosition: 'center top' }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Info section */}
-                  <div className="md:w-2/3 bg-gradient-to-r from-indigo-600 to-blue-700 p-8 flex items-center">
-                    <div className="text-white">
-                      <div className="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-bold py-1 px-4 rounded-full mb-4">
-                        {selectedChairman.placeString}
-                      </div>
-                      <h2 className="text-4xl font-bold font-cn mb-4">{selectedChairman.name}</h2>
-                      <div className="flex items-center space-x-2 mb-6">
-                        <span className="text-white/90 font-medium">{selectedChairman.term}</span>
-                        <span className="text-white/60">•</span>
-                        <span className="text-white/90 font-medium">{selectedChairman.year}</span>
-                      </div>
-                      <p className="text-white/80 text-lg">{selectedChairman.bio}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8">
-                  <div className="max-w-3xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div className="bg-indigo-50 rounded-xl border border-indigo-100 p-6">
-                        <h4 className="text-xl font-bold mb-3 text-indigo-800">贡献与成就</h4>
-                        <p className="text-gray-700">
-                          在{selectedChairman.name}的领导下，马来西亚傅氏公会取得了显著的发展与进步。
-                          他的奉献精神与领导才能为公会的壮大做出了重要贡献，赢得了全体宗亲的尊敬与爱戴。
-                        </p>
-                      </div>
-
-                      <div className="bg-blue-50 rounded-xl border border-blue-100 p-6">
-                        <h4 className="text-xl font-bold mb-3 text-blue-800">历史地位</h4>
-                        <p className="text-gray-700">
-                          作为第{selectedChairman.placeString.replace('第', '').replace('任', '')}位会长，
-                          {selectedChairman.name}在马来西亚傅氏公会的历史上占有重要地位。
-                          他的领导风格和决策对公会的发展方向产生了深远影响。
-                        </p>
+                  <div className="flex-grow">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <h3 className="text-lg font-bold font-cn text-gray-800">{president.name}</h3>
+                      <div className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-full">
+                        {president.placeString}
                       </div>
                     </div>
-
-                    <div className="mt-8 flex justify-center">
-                      <button
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-full transition-colors duration-300 flex items-center"
-                        onClick={() => setSelectedChairman(null)}
-                      >
-                        返回列表
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
-                      </button>
+                    <div className="flex gap-2 text-xs text-gray-500 mb-2">
+                      <span>{president.term}</span>
+                      <span>•</span>
+                      <span>{president.year}</span>
                     </div>
+                    <p className="text-gray-600 text-sm">{president.bio}</p>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
