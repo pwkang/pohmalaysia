@@ -79,7 +79,7 @@ function PastChairman() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
         {presidentList.map((president, index) => (
           <div
-            key={president.name}
+            key={president.year}
             className="flex flex-col justify-center items-center mt-6"
           >
             <Image

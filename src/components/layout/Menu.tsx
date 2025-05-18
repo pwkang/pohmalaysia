@@ -131,7 +131,7 @@ interface MenuProps {
 
 function Menu({ scrolled }: MenuProps) {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center flex-wrap">
       {navItems.map((item) => {
         if (item.href) {
           return <NavItem key={item.name} href={item.href} name={item.name} scrolled={scrolled} />;

@@ -9,7 +9,7 @@ import config from '@lib/config';
 
 function Footer() {
   return (
-    <footer className="bg-neutral-800 text-white pt-12 pb-6">
+    <footer className="bg-neutral-800 text-white pt-12 pb-6 mt-16">
       <div className="container mx-auto px-4">
         {/* Main footer content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -67,20 +67,20 @@ function Footer() {
               <li className="flex items-start">
                 <MdLocationOn className="text-blue-400 mt-1 mr-2 flex-shrink-0" size={18} />
                 <span className="text-sm text-gray-300">
-                  TAMAN VISTA HILL, PT 58249, JALAN MAHKOTA 9, BANDAR MAHKOTA CHERAS, 43200 KAJANG SELANGOR
+                  {config.address.gombak}
                 </span>
               </li>
               <li className="flex items-center">
                 <MdPhone className="text-blue-400 mr-2 flex-shrink-0" size={18} />
-                <span className="text-sm text-gray-300">Eve: 016-3326088</span>
+                <span className="text-sm text-gray-300">{config.phone} (Eve)</span>
               </li>
               <li className="flex items-center">
                 <MdEmail className="text-blue-400 mr-2 flex-shrink-0" size={18} />
                 <a
-                  href="mailto:info@pohmalaysia.org"
+                  href={`mailto:${config.email}`}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
-                  info@pohmalaysia.org
+                  {config.email}
                 </a>
               </li>
             </ul>
