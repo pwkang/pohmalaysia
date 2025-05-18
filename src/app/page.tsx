@@ -1,7 +1,6 @@
 import Layout from '../components/layout/layout';
 import HeroSlider from '../components/layout/HeroSlider';
 import History from '../components/templates/home/History';
-import PastChairman from '../components/templates/home/PastChairman';
 import AssociationLocation from '../components/templates/home/AssociationLocation';
 import DonationReport from '../components/templates/home/DonationReport';
 import { Metadata } from 'next';
@@ -13,7 +12,6 @@ export default function Home() {
       <HeroSlider />
       <div className="container mx-auto px-4">
         <History />
-        <PastChairman />
         <AssociationLocation />
         <DonationReport />
       </div>

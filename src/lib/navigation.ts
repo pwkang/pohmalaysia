@@ -4,8 +4,17 @@ export const navItems = [
     href: '/',
   },
   {
-    name: '傅氏缘起',
-    href: '/poh-origin',
+    name: '关于我们',
+    items: [
+      {
+        name: '傅氏缘起',
+        href: '/poh-origin',
+      },
+      {
+        name: '历届会长',
+        href: '/past-chairman',
+      }
+    ]
   },
   {
     name: '组织结构',
