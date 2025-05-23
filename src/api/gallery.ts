@@ -41,7 +41,7 @@ export const fetchGallerySlugs = async () => {
     }
   `);
 
-  return gallerySlugs.galleries.map((gallery) => gallery.slug) as string[];
+  return gallerySlugs.galleries.map(gallery => gallery.slug) as string[];
 };
 
 export const listAllGalleries = async () => {

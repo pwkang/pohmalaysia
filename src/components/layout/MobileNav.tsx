@@ -68,7 +68,7 @@ function NavDropdown({ name, items }: NavDropdownProps) {
                   {
                     'bg-blue-500 text-white': isActive,
                     'text-neutral-700 hover:bg-gray-100': !isActive,
-                  }
+                  },
                 )}
               >
                 {item.name}
@@ -88,16 +88,16 @@ interface MobileNavProps {
 function MobileNav({ scrolled }: MobileNavProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const toggle = () => setIsOpen((s) => !s);
+  const toggle = () => setIsOpen(s => !s);
 
   return (
     <>
       <button
         className={cn(
-          "p-2 rounded-full transition-all duration-300",
+          'p-2 rounded-full transition-all duration-300',
           scrolled
-            ? "bg-gray-100 text-blue-700 hover:bg-gray-200"
-            : "bg-white/10 text-white hover:bg-white/20"
+            ? 'bg-gray-100 text-blue-700 hover:bg-gray-200'
+            : 'bg-white/10 text-white hover:bg-white/20',
         )}
         onClick={toggle}
         aria-label="Menu"

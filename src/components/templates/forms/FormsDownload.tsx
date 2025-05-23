@@ -27,7 +27,7 @@ function FormsDownload() {
     <Container className="p-4 mt-8">
       <Image src="/img/forms/t5.png" alt="表格下载区" width={456} height={86} />
       <h1 className="text-center mt-4">总会表格</h1>
-      {mainForms.map((form) => (
+      {mainForms.map(form => (
         <div
           key={form}
           className="flex px-4 justify-between items-center hover:bg-gray-200 mt-1 py-1"
@@ -44,7 +44,7 @@ function FormsDownload() {
         </div>
       ))}
       <h1 className="text-center mt-8">属会表格</h1>
-      {branchForms.map((form) => (
+      {branchForms.map(form => (
         <div
           key={form}
           className="flex px-4 justify-between items-center hover:bg-gray-200 mt-1 py-1"

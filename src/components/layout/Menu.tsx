@@ -39,8 +39,9 @@ function NavItem({ name, href, scrolled }: NavItemProps) {
         {
           'bg-blue-500 scale-x-100': isActive,
           'bg-blue-400': !isActive,
-        }
-      )} />
+        },
+      )}
+      />
     </Link>
   );
 }
@@ -56,7 +57,7 @@ interface NavDropdownProps {
 
 function NavDropdown({ items, name, scrolled }: NavDropdownProps) {
   const pathname = usePathname();
-  const isActive = items.some((item) => pathname === item.href);
+  const isActive = items.some(item => pathname === item.href);
 
   return (
     <div className="group relative">
@@ -81,14 +82,16 @@ function NavDropdown({ items, name, scrolled }: NavDropdownProps) {
           {
             'bg-blue-500 scale-x-100': isActive,
             'bg-blue-400': !isActive,
-          }
-        )} />
+          },
+        )}
+        />
       </div>
       <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute left-0 pt-2 min-w-[200px] z-50">
         <div className={cn(
           'rounded-lg shadow-xl overflow-hidden border',
-          scrolled ? 'bg-white/95 backdrop-blur-sm border-gray-100' : 'bg-white/10 backdrop-blur-md border-white/10'
-        )}>
+          scrolled ? 'bg-white/95 backdrop-blur-sm border-gray-100' : 'bg-white/10 backdrop-blur-md border-white/10',
+        )}
+        >
           {items.map((item) => {
             const isItemActive = pathname === item.href;
             return (
@@ -105,7 +108,7 @@ function NavDropdown({ items, name, scrolled }: NavDropdownProps) {
                     // Dark mode (not scrolled)
                     'text-white bg-white/20': !scrolled && isItemActive,
                     'text-white/90 hover:bg-white/10 hover:text-white': !scrolled && !isItemActive,
-                  }
+                  },
                 )}
               >
                 <span className="relative z-10">{item.name}</span>
@@ -114,8 +117,9 @@ function NavDropdown({ items, name, scrolled }: NavDropdownProps) {
                   {
                     'opacity-100': isItemActive,
                     'opacity-0 group-hover/item:opacity-100': !isItemActive,
-                  }
-                )} />
+                  },
+                )}
+                />
               </Link>
             );
           })}

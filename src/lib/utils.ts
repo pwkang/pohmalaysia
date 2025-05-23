@@ -1,5 +1,5 @@
-import classNames, { Argument} from "classnames";
-import { twMerge } from "tw-merge";
+import classNames, { Argument } from 'classnames';
+import { twMerge } from 'tw-merge';
 
 export const __DEV__ = process.env.ENVIRONMENT === 'development';
 

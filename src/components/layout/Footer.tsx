@@ -47,7 +47,7 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">快速链接</h3>
             <ul className="space-y-2">
-              {navItems.slice(0, 5).map((item) => (
+              {navItems.slice(0, 5).map(item => (
                 <li key={item.name}>
                   <Link
                     href={item.href || '#'}
@@ -72,7 +72,11 @@ function Footer() {
               </li>
               <li className="flex items-center">
                 <MdPhone className="text-blue-400 mr-2 flex-shrink-0" size={18} />
-                <span className="text-sm text-gray-300">{config.phone} (Eve)</span>
+                <span className="text-sm text-gray-300">
+                  {config.phone}
+                  {' '}
+                  (Eve)
+                </span>
               </li>
               <li className="flex items-center">
                 <MdEmail className="text-blue-400 mr-2 flex-shrink-0" size={18} />
@@ -100,7 +104,12 @@ function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-6 mt-6 text-center text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} 马来西亚傅氏总会 (Poh Association of Malaysia). All rights reserved.</p>
+          <p>
+            ©
+            {new Date().getFullYear()}
+            {' '}
+            马来西亚傅氏总会 (Poh Association of Malaysia). All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

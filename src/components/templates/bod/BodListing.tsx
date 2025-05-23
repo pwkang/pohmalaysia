@@ -27,7 +27,7 @@ async function BodListing({ slug }: BodListingProps) {
           return (
             <Fragment key={`role-${committee.title}`}>
               {committee.newRow && <hr className="w-full h-0 border-none" />}
-              {committee.members.map((member) => (
+              {committee.members.map(member => (
                 <div
                   className="rounded-xl overflow-hidden shadow-lg"
                   key={`member-${member.name}`}

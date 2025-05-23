@@ -51,7 +51,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       // Otherwise, we'll need to load it in the modal
       if (originalImagesLoaded[currentImage]) {
         setModalImageLoaded(true);
-      } else {
+      }
+      else {
         setModalImageLoaded(false);
       }
     }
@@ -64,7 +65,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           // Get the index from the data attribute
           const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
 
@@ -79,8 +80,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       {
         root: null, // Use the viewport as the root
         rootMargin: '200px', // Start loading images when they're 200px from entering the viewport
-        threshold: 0.1 // Trigger when at least 10% of the element is visible
-      }
+        threshold: 0.1, // Trigger when at least 10% of the element is visible
+      },
     );
 
     // Observe all image containers
@@ -92,7 +93,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
     return () => {
       // Clean up the observer when the component unmounts
-      imageRefs.current.forEach(ref => {
+      imageRefs.current.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
@@ -104,7 +105,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       <p className="text-xs tracking-widest text-center mt-4 uppercase font-bold font-sans">
         {dayjs(date).format('DD MMMM YYYY')}
         <span className="mx-2">•</span>
-        {dayjs(date).format('YYYY')}年
+        {dayjs(date).format('YYYY')}
+        年
       </p>
 
       <div className="max-w-[95%] md:max-w-[90%] w-5xl m-auto mt-8 mb-16">
@@ -113,7 +115,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
           {images.map((image, index) => {
             // Generate a random aspect ratio for Pinterest-like effect
             // This creates a more dynamic, masonry-style layout
-            const aspectRatio = [3/4, 4/3, 1, 5/4, 4/5, 9/16, 16/9][index % 7];
+            const aspectRatio = [3 / 4, 4 / 3, 1, 5 / 4, 4 / 5, 9 / 16, 16 / 9][index % 7];
             const paddingTop = `${(1 / aspectRatio) * 100}%`;
 
             // Determine if this image should be loaded
@@ -185,7 +187,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
               >
                 <div
                   className="relative w-full max-w-4xl"
-                  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+                  onClick={e => e.stopPropagation()} // Prevent closing when clicking on the image
                 >
                   {/* Close button positioned relative to the image */}
                   <button
@@ -231,7 +233,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                   {/* Modal Navigation Controls */}
                   <div
                     className="absolute inset-x-0 bottom-0 flex justify-between items-center p-2 sm:p-4"
-                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on navigation controls
+                    onClick={e => e.stopPropagation()} // Prevent closing when clicking on navigation controls
                   >
                     <button
                       onClick={(e) => {
@@ -246,7 +248,10 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     </button>
 
                     <div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-                      {currentImage + 1} / {images.length}
+                      {currentImage + 1}
+                      {' '}
+                      /
+                      {images.length}
                     </div>
 
                     <button

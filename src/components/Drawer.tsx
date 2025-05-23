@@ -23,8 +23,8 @@ type PlacementFn = ({
   height?: string | number;
 }) => MotionProps & DivPropsWithoutRef;
 
-const commonClassname =
-  'fixed z-50 bg-white drop-shadow-lg max-h-screen max-w-full';
+const commonClassname
+  = 'fixed z-50 bg-white drop-shadow-lg max-h-screen max-w-full';
 
 const PLACEMENTS_MAP: Record<Placement, PlacementFn> = {
   top: ({ height }) => ({

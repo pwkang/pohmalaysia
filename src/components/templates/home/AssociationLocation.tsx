@@ -81,12 +81,18 @@ function AssociationLocation() {
             <h3 className="font-bold text-xl">{association.nameCn}</h3>
             <p className="font-bold text-xl">{association.nameMy}</p>
             {association.nameEn && (
-              <p className="text-sm">({association.nameEn})</p>
+              <p className="text-sm">
+                (
+                {association.nameEn}
+                )
+              </p>
             )}
             <p className="text-sm mb-4">{association.registration}</p>
             <p className="text-sm">{association.address}</p>
             <p className="text-sm">
-              {association.contactPerson} {association.contactNumber}
+              {association.contactPerson}
+              {' '}
+              {association.contactNumber}
             </p>
           </div>
         ))}

@@ -35,7 +35,7 @@ async function Page({ params: { slug } }) {
 
 export async function generateStaticParams() {
   const slugs = await fetchGallerySlugs();
-  return slugs.map((slug) => ({
+  return slugs.map(slug => ({
     slug,
   }));
 }

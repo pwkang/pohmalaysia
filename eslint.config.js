@@ -47,6 +47,7 @@ export default [
       'unused-imports': unusedImports,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      '@stylistic': stylistic,
     },
     rules: {
       'no-unused-vars': 'off',
@@ -60,6 +61,7 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
+      '@stylistic/no-multiple-empty-lines': "error"
     },
   },
 ];
