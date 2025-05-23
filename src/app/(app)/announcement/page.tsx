@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from '../../components/layout/layout';
-import HeroSlider from '../../components/layout/HeroSlider';
-import AnnouncementListing from '../../components/templates/announcement/AnnouncementListing';
+import Layout from '../../../components/layout/layout';
+import HeroSlider from '../../../components/layout/HeroSlider';
+import AnnouncementListing from '../../../components/templates/announcement/AnnouncementListing';
 import { defaultMetadata } from '@lib/default-metadata';
 import { Metadata } from 'next';
 
