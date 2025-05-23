@@ -51,8 +51,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       // Otherwise, we'll need to load it in the modal
       if (originalImagesLoaded[currentImage]) {
         setModalImageLoaded(true);
-      }
-      else {
+      } else {
         setModalImageLoaded(false);
       }
     }

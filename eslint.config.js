@@ -47,7 +47,6 @@ export default [
       'unused-imports': unusedImports,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      '@stylistic': stylistic,
     },
     rules: {
       'no-unused-vars': 'off',
@@ -61,7 +60,15 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
-      '@stylistic/no-multiple-empty-lines': "error"
+    },
+  },
+  {
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/no-multiple-empty-lines': 'error',
+      '@stylistic/brace-style': ['error', '1tbs'],
     },
   },
 ];

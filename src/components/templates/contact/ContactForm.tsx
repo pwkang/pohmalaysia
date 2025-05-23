@@ -49,8 +49,7 @@ function ContactForm() {
 
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    }
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
 
@@ -99,11 +98,9 @@ function ContactForm() {
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error submitting form:', error);
-    }
-    finally {
+    } finally {
       setIsSubmitting(false);
     }
   };
