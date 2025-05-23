@@ -62,4 +62,13 @@ export default [
       ],
     },
   },
+  {
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/no-multiple-empty-lines': 'error',
+      '@stylistic/brace-style': ['error', '1tbs'],
+    },
+  },
 ];

@@ -15,7 +15,8 @@ function NewspaperPage({ newspaper }: NewspaperPageProps) {
         <p className="text-xs tracking-widest text-center mt-4 uppercase font-bold font-sans">
           {dayjs(newspaper.date).format('DD MMMM YYYY')}
           <span className="mx-2">•</span>
-          {dayjs(newspaper.date).format('YYYY')}年
+          {dayjs(newspaper.date).format('YYYY')}
+          年
         </p>
         <div className="mt-8 flex justify-center">
           <Image

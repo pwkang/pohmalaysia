@@ -17,8 +17,8 @@ export const navItems = [
       {
         name: '历届会长',
         href: '/past-chairman',
-      }
-    ]
+      },
+    ],
   },
   {
     name: '组织结构',

@@ -13,7 +13,7 @@ interface Props {
 }
 
 function Page({ params: { slug } }: Props) {
-  const news = newspaper.find((event) => event.slug === slug);
+  const news = newspaper.find(event => event.slug === slug);
 
   if (!news) {
     return <Layout>Event not found</Layout>;
@@ -28,13 +28,13 @@ function Page({ params: { slug } }: Props) {
 }
 
 export async function generateStaticParams() {
-  return newspaper.map((event) => ({
+  return newspaper.map(event => ({
     slug: event.slug,
   }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const news = newspaper.find((event) => event.slug === params.slug);
+  const news = newspaper.find(event => event.slug === params.slug);
 
   return {
     ...defaultMetadata,

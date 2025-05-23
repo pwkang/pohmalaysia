@@ -41,7 +41,7 @@ export const fetchBodSlugs = async () => {
     }
   `);
 
-  return bodSlugs.bodPages.map((page) => page.slug) as string[];
+  return bodSlugs.bodPages.map(page => page.slug) as string[];
 };
 
 export const getBodPageMetadata = async (slug: string) => {

@@ -20,7 +20,7 @@ function Page({ params: { slug } }: PageProps) {
 
 export async function generateStaticParams() {
   const slugs = await fetchBodSlugs();
-  return slugs.map((slug) => ({
+  return slugs.map(slug => ({
     slug,
   }));
 }

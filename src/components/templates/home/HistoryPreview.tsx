@@ -7,15 +7,15 @@ function HistoryPreview() {
   return (
     <Container className="mt-12 mb-16 p-4">
       <div className="text-center mb-8">
-        <Image 
-          src="/img/home/t1.png" 
-          alt="总会简史" 
-          width={456} 
-          height={86} 
+        <Image
+          src="/img/home/t1.png"
+          alt="总会简史"
+          width={456}
+          height={86}
           className="mx-auto"
         />
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="text-gray-600 space-y-4">
           <p className="text-lg">
@@ -25,17 +25,17 @@ function HistoryPreview() {
             在1975年成立的傅氏公会，也是在这样的情况下, 受到大气候的感召成立，由几位高澹远瞩的宗亲前辈登高一呼，率先领导傅氏宗亲团结，在众志成城的情况下成功成立。
           </p>
           <div className="mt-8">
-            <Link 
-              href="/history" 
+            <Link
+              href="/history"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md"
             >
               阅读完整历史
             </Link>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
-          {[1, 2, 3, 4].map((index) => (
+          {[1, 2, 3, 4].map(index => (
             <div
               key={`history_preview_${index}`}
               className="aspect-square relative border-2 overflow-hidden rounded-lg shadow-md"
