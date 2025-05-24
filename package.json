@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --port 4317",
-    "build": "next build",
+    "build": "npm run payload migrate && next build",
     "start": "next start",
     "lint": "next lint --fix",
     "prepare": "husky",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "ci": "payload migrate && npm run build"
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.39.1",
