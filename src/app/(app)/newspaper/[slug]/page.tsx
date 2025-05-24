@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from '../../../components/layout/layout';
-import HeroSlider from '../../../components/layout/HeroSlider';
-import { newspaper } from '../../../components/templates/newspaper/newspaper';
-import NewspaperPage from '../../../components/templates/newspaper/NewspaperPage';
+import Layout from '@/components/layout/layout';
 import { Metadata } from 'next';
-import { defaultMetadata } from '@lib/default-metadata';
+import { defaultMetadata } from '@/lib//default-metadata';
+import { newspaper } from '@/components/templates/newspaper/newspaper';
+import HeroSlider from '@/components/layout/HeroSlider';
+import NewspaperPage from '@/components/templates/newspaper/NewspaperPage';
 
 interface Props {
   params: {

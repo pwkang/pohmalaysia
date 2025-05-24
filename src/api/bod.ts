@@ -1,4 +1,4 @@
-import { fetchStrapi } from '@lib/strapi-graphql';
+import { fetchStrapi } from '@/lib/strapi-graphql';
 import { gql } from 'graphql-request';
 import { BodPage } from '../@types/bodPage';
 

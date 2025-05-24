@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request';
-import { fetchStrapi } from '@lib/strapi-graphql';
+import { fetchStrapi } from '@/lib/strapi-graphql';
 import { Gallery } from '../@types/gallery';
 
 export const fetchGallery = async (slug: string) => {

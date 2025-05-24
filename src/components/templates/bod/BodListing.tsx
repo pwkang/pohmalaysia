@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { fetchBodPage } from '../../../api/bod';
 import Container from '../../Container';
 import Image from 'next/image';
-import config from '@lib/config';
+import config from '@/lib/config';
 
 interface BodListingProps {
   slug: string;

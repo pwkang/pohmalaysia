@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Local from 'next/font/local';
-import '@styles/globals.css';
-import { links } from '@lib/links';
+import '@/styles/globals.css';
+import { links } from '@/lib/links';
 import { ReactNode } from 'react';
-import Scripts from '@components/templates/scripts';
+import Scripts from '@/components/templates/scripts';
 
 const cnFont = Local({
   src: './font_han_sans_cn_regular.otf',

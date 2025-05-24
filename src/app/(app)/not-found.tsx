@@ -1,6 +1,6 @@
 import React from 'react';
-import { defaultMetadata } from '@lib/default-metadata';
-import Layout from '@components/layout/layout';
+import { defaultMetadata } from '@/lib//default-metadata';
+import Layout from '@/components/layout/layout';
 function PageNotFound() {
   return (
     <Layout>

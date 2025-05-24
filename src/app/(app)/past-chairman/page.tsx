@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../../components/layout/layout';
-import HeroSlider from '../../components/layout/HeroSlider';
-import PastChairmanListing from '../../components/templates/past-chairman/PastChairmanListing';
 import { Metadata } from 'next';
-import { defaultMetadata } from '@lib/default-metadata';
+import { defaultMetadata } from '@/lib//default-metadata';
+import HeroSlider from '@/components/layout/HeroSlider';
+import PastChairmanListing from '@/components/templates/past-chairman/PastChairmanListing';
+import Layout from '@/components/layout/layout';
 
 function Page() {
   return (

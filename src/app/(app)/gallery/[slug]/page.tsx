@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from '../../../components/layout/layout';
-import HeroSlider from '../../../components/layout/HeroSlider';
-import GalleryImages from '../../../components/templates/gallery/GalleryImages';
+import Layout from '@/components/layout/layout';
+import HeroSlider from '@/components/layout/HeroSlider';
+import GalleryImages from '@/components/templates/gallery/GalleryImages';
 import {
   fetchGallery,
   fetchGalleryMetadata,
   fetchGallerySlugs,
-} from '../../../api/gallery';
+} from '@/api/gallery';
 
 interface PageProps {
   params: {

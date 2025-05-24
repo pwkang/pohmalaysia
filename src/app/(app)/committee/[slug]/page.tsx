@@ -1,8 +1,8 @@
 import React from 'react';
-import Layout from '../../../components/layout/layout';
-import BodListing from '../../../components/templates/bod/BodListing';
-import { fetchBodSlugs, getBodPageMetadata } from '../../../api/bod';
 import { Metadata } from 'next';
+import Layout from '@/components/layout/layout';
+import { getBodPageMetadata, fetchBodSlugs } from '@/api/bod';
+import BodListing from '@/components/templates/bod/BodListing';
 
 interface PageProps {
   params: {

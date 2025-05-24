@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import cn from 'classnames';
-import { navItems } from '@lib/navigation';
+import { navItems } from '@/lib/navigation';
 import { HiChevronDown } from 'react-icons/hi';
 
 interface NavItemProps {

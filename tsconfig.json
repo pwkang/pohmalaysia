@@ -23,17 +23,11 @@
       }
     ],
     "paths": {
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@lib/*": [
-        "src/lib/*"
-      ],
       "@payload-config": [
         "src/payload.config.ts"
       ],
-      "@components/*": [
-        "src/components/*"
+      "@/*": [
+        "src/*"
       ]
     },
     "target": "ES2017"

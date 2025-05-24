@@ -3,7 +3,7 @@ import Container from '../../Container';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook } from 'react-icons/fa';
-import config from '@lib/config';
+import config from '@/lib/config';
 
 function ContactInfo() {
   return (
@@ -75,7 +75,7 @@ function ContactInfo() {
             <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" />
             <p className="text-gray-700">
               <span className="font-semibold">Address: </span>
-              <p>No.6B, Jalan SG 1/2, Seri Gombak, Batu Caves, 68100 Selangor D.E, Malaysia.</p>
+              <span>No.6B, Jalan SG 1/2, Seri Gombak, Batu Caves, 68100 Selangor D.E, Malaysia.</span>
             </p>
           </div>
 
@@ -104,7 +104,7 @@ function ContactInfo() {
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <div className="flex items-center gap-2 mb-6">
             <div className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Coming Soon</div>
-            <h2 className="text-2xl font-bold">Future Office Location</h2>
+            <h2 className="text-2xl font-bold">Office Location (Upcoming)</h2>
           </div>
 
           <div className="flex items-start gap-3 mb-4">

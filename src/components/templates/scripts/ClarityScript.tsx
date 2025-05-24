@@ -1,6 +1,6 @@
 import React from 'react';
 import Script from 'next/script';
-import { __PROD__ } from '@lib/utils';
+import { __PROD__ } from '@/lib/utils';
 
 function ClarityScript() {
   if (!__PROD__) return null;
