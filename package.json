@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "ci": "payload migrate && npm run build"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.39.1",
@@ -45,6 +47,7 @@
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^9.27.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
