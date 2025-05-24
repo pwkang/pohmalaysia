@@ -1,8 +1,8 @@
-import Layout from '../components/layout/layout';
-import HeroSlider from '../components/layout/HeroSlider';
-import AssociationLocation from '../components/templates/home/AssociationLocation';
-import DonationReport from '../components/templates/home/DonationReport';
-import HistoryPreview from '../components/templates/home/HistoryPreview';
+import Layout from '@components/layout/layout';
+import HeroSlider from '@components/layout/HeroSlider';
+import AssociationLocation from '@components/templates/home/AssociationLocation';
+import DonationReport from '@components/templates/home/DonationReport';
+import HistoryPreview from '@components/templates/home/HistoryPreview';
 import { Metadata } from 'next';
 import { defaultMetadata } from '@lib/default-metadata';
 
