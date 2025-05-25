@@ -17,7 +17,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE IF NOT EXISTS "media" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"alt" varchar NOT NULL,
+  	"alt" varchar,
   	"prefix" varchar DEFAULT 'websites/media',
   	"folder_id" integer,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,

@@ -10,7 +10,9 @@ export const Media: CollectionConfig = {
       name: 'alt',
       label: 'Alt Text',
       type: 'text',
-      required: true,
+      defaultValue: ({ req }) => {
+        return req.file?.name.split('.').slice(0, -1).join('_');
+      },
     },
   ],
   admin: {

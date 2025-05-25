@@ -152,7 +152,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   prefix?: string | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;

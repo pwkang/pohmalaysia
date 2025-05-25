@@ -1,5 +1,5 @@
 {
-  "id": "8711b100-f53e-466f-8631-8f91d104e5e9",
+  "id": "1fb3743d-9f52-4a61-9387-ba3f81ff97cf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -140,7 +140,7 @@
           "name": "alt",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "prefix": {
           "name": "prefix",
