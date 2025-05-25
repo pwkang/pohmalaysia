@@ -8,6 +8,7 @@ export const Media: CollectionConfig = {
   fields: [
     {
       name: 'alt',
+      label: 'Alt Text',
       type: 'text',
       required: true,
     },
@@ -24,7 +25,7 @@ export const Media: CollectionConfig = {
           },
         },
         generateImageName: ({ originalName }) => {
-          return `${originalName}_thumbnail.webp`;
+          return `${originalName}_${Date.now()}_thumbnail.webp`;
         },
       },
       {
@@ -34,7 +35,7 @@ export const Media: CollectionConfig = {
           format: 'webp',
         },
         generateImageName: ({ originalName }) => {
-          return `${originalName}_webview.webp`;
+          return `${originalName}_${Date.now()}_webview.webp`;
         },
       },
     ],

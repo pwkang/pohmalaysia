@@ -184,8 +184,8 @@ export interface Media {
  */
 export interface Member {
   id: number;
-  Name?: string | null;
-  Avatar?: (number | null) | Media;
+  name?: string | null;
+  avatar?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -195,18 +195,18 @@ export interface Member {
  */
 export interface Committee {
   id: number;
-  Name?: string | null;
-  Year?:
+  name?: string | null;
+  year?:
     | {
         Start?: number | null;
         End?: number | null;
         id?: string | null;
       }[]
     | null;
-  Committees?:
+  committees?:
     | {
-        Title?: (number | null) | Role;
-        Members?: (number | Member)[] | null;
+        title?: (number | null) | Role;
+        members?: (number | Member)[] | null;
         id?: string | null;
       }[]
     | null;
@@ -219,7 +219,7 @@ export interface Committee {
  */
 export interface Role {
   id: number;
-  Name?: string | null;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -229,11 +229,11 @@ export interface Role {
  */
 export interface CommitteePage {
   id: number;
-  Name?: string | null;
-  Slug?: string | null;
-  'Meta Title'?: string | null;
-  'Meta Description'?: string | null;
-  Committees?: (number | Committee)[] | null;
+  name?: string | null;
+  slug?: string | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  committees?: (number | Committee)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -393,8 +393,8 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "members_select".
  */
 export interface MembersSelect<T extends boolean = true> {
-  Name?: T;
-  Avatar?: T;
+  name?: T;
+  avatar?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -403,19 +403,19 @@ export interface MembersSelect<T extends boolean = true> {
  * via the `definition` "committee_select".
  */
 export interface CommitteeSelect<T extends boolean = true> {
-  Name?: T;
-  Year?:
+  name?: T;
+  year?:
     | T
     | {
         Start?: T;
         End?: T;
         id?: T;
       };
-  Committees?:
+  committees?:
     | T
     | {
-        Title?: T;
-        Members?: T;
+        title?: T;
+        members?: T;
         id?: T;
       };
   updatedAt?: T;
@@ -426,7 +426,7 @@ export interface CommitteeSelect<T extends boolean = true> {
  * via the `definition` "roles_select".
  */
 export interface RolesSelect<T extends boolean = true> {
-  Name?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -435,11 +435,11 @@ export interface RolesSelect<T extends boolean = true> {
  * via the `definition` "committee-page_select".
  */
 export interface CommitteePageSelect<T extends boolean = true> {
-  Name?: T;
-  Slug?: T;
-  'Meta Title'?: T;
-  'Meta Description'?: T;
-  Committees?: T;
+  name?: T;
+  slug?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  committees?: T;
   updatedAt?: T;
   createdAt?: T;
 }

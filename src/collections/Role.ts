@@ -8,7 +8,8 @@ export const Role: CollectionConfig = {
   slug: 'roles',
   fields: [
     {
-      name: 'Name',
+      name: 'name',
+      label: 'Name',
       type: 'text',
     },
   ],

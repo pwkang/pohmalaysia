@@ -8,23 +8,28 @@ export const CommitteePage: CollectionConfig = {
   slug: 'committee-page',
   fields: [
     {
-      name: 'Name',
+      name: 'name',
+      label: 'Name',
       type: 'text',
     },
     {
-      name: 'Slug',
+      name: 'slug',
+      label: 'Slug',
       type: 'text',
     },
     {
-      name: 'Meta Title',
+      name: 'metaTitle',
+      label: 'Meta Title',
       type: 'text',
     },
     {
-      name: 'Meta Description',
+      name: 'metaDescription',
+      label: 'Meta Description',
       type: 'text',
     },
     {
-      name: 'Committees',
+      name: 'committees',
+      label: 'Committees',
       type: 'relationship',
       relationTo: 'committee',
       hasMany: true,

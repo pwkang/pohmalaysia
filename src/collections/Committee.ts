@@ -8,11 +8,13 @@ export const Committee: CollectionConfig = {
   slug: 'committee',
   fields: [
     {
-      name: 'Name',
+      name: 'name',
+      label: 'Name',
       type: 'text',
     },
     {
-      name: 'Year',
+      name: 'year',
+      label: 'Year',
       type: 'array',
       fields: [
         {
@@ -26,16 +28,19 @@ export const Committee: CollectionConfig = {
       ],
     },
     {
-      name: 'Committees',
+      name: 'committees',
+      label: 'Committees',
       type: 'array',
       fields: [
         {
-          name: 'Title',
+          name: 'title',
+          label: 'Title',
           type: 'relationship',
           relationTo: 'roles',
         },
         {
-          name: 'Members',
+          name: 'members',
+          label: 'Members',
           type: 'relationship',
           relationTo: 'members',
           hasMany: true,

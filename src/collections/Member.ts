@@ -8,11 +8,13 @@ export const Member: CollectionConfig = {
   slug: 'members',
   fields: [
     {
-      name: 'Name',
+      name: 'name',
+      label: 'Name',
       type: 'text',
     },
     {
-      name: 'Avatar',
+      name: 'avatar',
+      label: 'Avatar',
       type: 'upload',
       relationTo: 'media',
       displayPreview: true,
