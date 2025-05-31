@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import config from '@lib/config';
-import { links } from '@lib/links';
+import config from '@/lib/config';
+import { links } from '@/lib/links';
 import { FaSquareFacebook } from 'react-icons/fa6';
 import Menu from './Menu';
 import MobileNav from './MobileNav';
-import { cn } from '@lib/utils';
+import { cn } from '@/lib/utils';
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
