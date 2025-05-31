@@ -98,7 +98,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {};
   globalsSelect: {};
@@ -134,9 +134,12 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -151,10 +154,10 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt?: string | null;
   prefix?: string | null;
-  folder?: (number | null) | FolderInterface;
+  folder?: (string | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -190,18 +193,18 @@ export interface Media {
  * via the `definition` "payload-folders".
  */
 export interface FolderInterface {
-  id: number;
+  id: string;
   name: string;
-  folder?: (number | null) | FolderInterface;
+  folder?: (string | null) | FolderInterface;
   documentsAndFolders?: {
     docs?: (
       | {
           relationTo?: 'payload-folders';
-          value: number | FolderInterface;
+          value: string | FolderInterface;
         }
       | {
           relationTo?: 'media';
-          value: number | Media;
+          value: string | Media;
         }
     )[];
     hasNextPage?: boolean;
@@ -215,9 +218,9 @@ export interface FolderInterface {
  * via the `definition` "members".
  */
 export interface Member {
-  id: number;
+  id: string;
   name?: string | null;
-  avatar?: (number | null) | Media;
+  avatar?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -226,7 +229,7 @@ export interface Member {
  * via the `definition` "committee".
  */
 export interface Committee {
-  id: number;
+  id: string;
   name?: string | null;
   year?:
     | {
@@ -237,8 +240,8 @@ export interface Committee {
     | null;
   committees?:
     | {
-        title?: (number | null) | Role;
-        members?: (number | Member)[] | null;
+        title?: (string | null) | Role;
+        members?: (string | Member)[] | null;
         id?: string | null;
       }[]
     | null;
@@ -250,7 +253,7 @@ export interface Committee {
  * via the `definition` "roles".
  */
 export interface Role {
-  id: number;
+  id: string;
   name?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -260,12 +263,12 @@ export interface Role {
  * via the `definition` "committee-page".
  */
 export interface CommitteePage {
-  id: number;
+  id: string;
   name?: string | null;
   slug?: string | null;
   metaTitle?: string | null;
   metaDescription?: string | null;
-  committees?: (number | Committee)[] | null;
+  committees?: (string | Committee)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -274,14 +277,14 @@ export interface CommitteePage {
  * via the `definition` "gallery".
  */
 export interface Gallery {
-  id: number;
+  id: string;
   title?: string | null;
   slug?: string | null;
   date?: string | null;
-  images?: (number | Media)[] | null;
+  images?: (string | Media)[] | null;
   metaTitle?: string | null;
   metaDescription?: string | null;
-  thumbnail?: (number | null) | Media;
+  thumbnail?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -290,44 +293,44 @@ export interface Gallery {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'members';
-        value: number | Member;
+        value: string | Member;
       } | null)
     | ({
         relationTo: 'committee';
-        value: number | Committee;
+        value: string | Committee;
       } | null)
     | ({
         relationTo: 'roles';
-        value: number | Role;
+        value: string | Role;
       } | null)
     | ({
         relationTo: 'committee-page';
-        value: number | CommitteePage;
+        value: string | CommitteePage;
       } | null)
     | ({
         relationTo: 'gallery';
-        value: number | Gallery;
+        value: string | Gallery;
       } | null)
     | ({
         relationTo: 'payload-folders';
-        value: number | FolderInterface;
+        value: string | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -337,10 +340,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -360,7 +363,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -373,6 +376,9 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
