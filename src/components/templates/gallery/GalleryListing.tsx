@@ -19,7 +19,7 @@ async function GalleryListing() {
           >
             <div className="relative w-full h-56 overflow-hidden">
               <Image
-                src={event.thumbnail.url}
+                src={typeof event.thumbnail === 'string' ? event.thumbnail : event.thumbnail.url}
                 alt={event.title}
                 className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
                 fill

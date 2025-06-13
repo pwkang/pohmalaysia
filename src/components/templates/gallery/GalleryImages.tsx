@@ -6,6 +6,7 @@ import Image from 'next/image';
 import * as Dialog from '@radix-ui/react-dialog';
 import { motion } from 'framer-motion';
 import { IoClose, IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import { Media } from '@/payload-types';
 
 // Helper function to get thumbnail URL - kept for reference
 // We're now using original images with lazy loading for the grid
@@ -20,9 +21,7 @@ export const getThumbnailUrl = (url: string): string => {
 interface GalleryImagesProps {
   title: string;
   date: string;
-  images: {
-    url: string;
-  }[];
+  images: (string | Media)[];
 }
 
 function GalleryImages({ title, images, date }: GalleryImagesProps) {

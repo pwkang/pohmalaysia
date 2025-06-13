@@ -81,11 +81,7 @@ function NavDropdown({ name, items }: NavDropdownProps) {
   );
 }
 
-interface MobileNavProps {
-  scrolled: boolean;
-}
-
-function MobileNav({ scrolled }: MobileNavProps) {
+function MobileNav() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggle = () => setIsOpen(s => !s);
@@ -95,9 +91,8 @@ function MobileNav({ scrolled }: MobileNavProps) {
       <button
         className={cn(
           'p-2 rounded-full transition-all duration-300',
-          scrolled
-            ? 'bg-gray-100 text-blue-700 hover:bg-gray-200'
-            : 'bg-white/10 text-white hover:bg-white/20',
+          'group-data-[scrolled="true"]:bg-gray-100 group-data-[scrolled="true"]:text-blue-700 group-data-[scrolled="true"]:hover:bg-gray-200',
+          'bg-white/10 text-white hover:bg-white/20',
         )}
         onClick={toggle}
         aria-label="Menu"
