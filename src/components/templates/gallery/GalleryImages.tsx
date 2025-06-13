@@ -8,14 +8,29 @@ import { motion } from 'framer-motion';
 import { IoClose, IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { Media } from '@/payload-types';
 
-// Helper function to get thumbnail URL - kept for reference
-// We're now using original images with lazy loading for the grid
-// but we might still use thumbnails in other places
-export const getThumbnailUrl = (url: string): string => {
-  if (!url) return '';
-  const urlParts = url.split('/');
-  const filename = urlParts.pop() || '';
-  return [...urlParts, `thumbnail_${filename}`].join('/');
+// Helper function to get image URL from Media object or string
+export const getImageUrl = (image: string | Media): string => {
+  if (typeof image === 'string') return image;
+  return image.url || '';
+};
+
+// Helper function to get thumbnail URL from PayloadCMS Media object
+export const getThumbnailUrl = (image: string | Media): string => {
+  if (typeof image === 'string') {
+    // If it's a string URL, try to construct thumbnail URL
+    if (!image) return '';
+    const urlParts = image.split('/');
+    const filename = urlParts.pop() || '';
+    return [...urlParts, `thumbnail_${filename}`].join('/');
+  }
+
+  // If it's a Media object, use the thumbnail size if available
+  if (image.sizes?.thumbnail?.url) {
+    return image.sizes.thumbnail.url;
+  }
+
+  // Fallback to thumbnailURL property or main URL
+  return image.thumbnailURL || image.url || '';
 };
 
 interface GalleryImagesProps {
@@ -31,6 +46,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
   const [originalImagesLoaded, setOriginalImagesLoaded] = useState<Record<number, boolean>>({});
   const [modalImageLoaded, setModalImageLoaded] = useState(false);
   const [visibleImages, setVisibleImages] = useState<Record<number, boolean>>({});
+  const [preloadedImages, setPreloadedImages] = useState<Record<number, boolean>>({});
 
   // Create refs for each image container to observe visibility
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -43,6 +59,18 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
     setOriginalImagesLoaded(prev => ({ ...prev, [index]: true }));
   }, []);
 
+  // Preload image function for hover
+  const preloadImage = useCallback((index: number) => {
+    if (preloadedImages[index] || originalImagesLoaded[index]) return;
+
+    const img = document.createElement('img');
+    img.onload = () => {
+      setPreloadedImages(prev => ({ ...prev, [index]: true }));
+      setOriginalImagesLoaded(prev => ({ ...prev, [index]: true }));
+    };
+    img.src = getImageUrl(images[index]);
+  }, [images, preloadedImages, originalImagesLoaded]);
+
   // Update modal image loaded state when current image changes or modal opens
   useEffect(() => {
     if (modalOpen) {
@@ -53,8 +81,39 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
       } else {
         setModalImageLoaded(false);
       }
+
+      // Preload adjacent images for smoother navigation
+      const prevIndex = currentImage === 0 ? images.length - 1 : currentImage - 1;
+      const nextIndex = currentImage === images.length - 1 ? 0 : currentImage + 1;
+      preloadImage(prevIndex);
+      preloadImage(nextIndex);
+    } else {
+      // Reset modal image loaded state when modal closes
+      setModalImageLoaded(false);
     }
-  }, [currentImage, modalOpen, originalImagesLoaded]);
+  }, [currentImage, modalOpen, originalImagesLoaded, images.length, preloadImage]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        const prevImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
+        setCurrentImage(prevImage);
+        preloadImage(prevImage);
+      } else if (e.key === 'ArrowRight') {
+        const nextImage = currentImage === images.length - 1 ? 0 : currentImage + 1;
+        setCurrentImage(nextImage);
+        preloadImage(nextImage);
+      } else if (e.key === 'Escape') {
+        setModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [modalOpen, currentImage, images.length, preloadImage]);
 
   // Set up intersection observer for lazy loading
   useEffect(() => {
@@ -123,9 +182,12 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
             return (
               <div
                 key={index}
-                ref={el => imageRefs.current[index] = el}
+                ref={(el) => {
+                  imageRefs.current[index] = el;
+                }}
                 data-index={index}
                 className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group break-inside-avoid mb-4"
+                onMouseEnter={() => preloadImage(index)}
                 onClick={() => {
                   setCurrentImage(index);
                   setModalOpen(true);
@@ -139,7 +201,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
                   {/* Show thumbnail first */}
                   <Image
-                    src={getThumbnailUrl(image.url)}
+                    src={getThumbnailUrl(image)}
                     alt={`Thumbnail ${index + 1}`}
                     className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-0' : 'opacity-100'}`}
                     fill
@@ -152,7 +214,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                   {/* Load original image when in viewport */}
                   {shouldLoad && (
                     <Image
-                      src={image.url}
+                      src={getImageUrl(image)}
                       alt={`Image ${index + 1}`}
                       className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
                       fill
@@ -196,13 +258,22 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     <IoClose size={24} />
                   </button>
                   {/* Progressive loading for modal image */}
-                  <div className="relative w-full flex justify-center items-center">
+                  <div className="relative w-full flex justify-center items-center min-h-[60vh]">
+                    {/* Loading placeholder while image loads */}
+                    {!modalImageLoaded && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-gray-800/20 rounded-lg p-8">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* First show thumbnail in modal while original loads */}
                     {!modalImageLoaded && (
                       <Image
-                        src={getThumbnailUrl(images[currentImage].url)}
+                        src={getThumbnailUrl(images[currentImage])}
                         alt={`Thumbnail ${currentImage + 1}`}
-                        className="max-h-[80vh] w-auto transition-all duration-300"
+                        className="max-h-[80vh] w-auto transition-all duration-300 blur-sm"
                         width={1280}
                         height={720}
                         priority={true}
@@ -212,7 +283,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
                     {/* Then load and show the full-size image */}
                     <Image
-                      src={images[currentImage].url}
+                      src={getImageUrl(images[currentImage])}
                       alt={`Full size ${currentImage + 1}`}
                       className={`max-h-[80vh] w-auto transition-all duration-500 ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                       width={1920}
@@ -238,6 +309,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                         e.stopPropagation();
                         const prevImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
                         setCurrentImage(prevImage);
+                        // Preload the previous image for smoother navigation
+                        preloadImage(prevImage);
                       }}
                       className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
                       aria-label="Previous image"
@@ -257,6 +330,8 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                         e.stopPropagation();
                         const nextImage = currentImage === images.length - 1 ? 0 : currentImage + 1;
                         setCurrentImage(nextImage);
+                        // Preload the next image for smoother navigation
+                        preloadImage(nextImage);
                       }}
                       className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
                       aria-label="Next image"

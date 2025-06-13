@@ -3,6 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import { listAllGalleries } from '../../../api/gallery';
+import { Media } from '@/payload-types';
+
+// Helper function to get image URL from Media object or string
+const getImageUrl = (image: string | Media | null): string => {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+  return image.url || '';
+};
 
 async function GalleryListing() {
   const galleries = await listAllGalleries();
@@ -19,7 +27,7 @@ async function GalleryListing() {
           >
             <div className="relative w-full h-56 overflow-hidden">
               <Image
-                src={typeof event.thumbnail === 'string' ? event.thumbnail : event.thumbnail.url}
+                src={getImageUrl(event.thumbnail)}
                 alt={event.title}
                 className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
                 fill
