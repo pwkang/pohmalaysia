@@ -23,11 +23,11 @@
       }
     ],
     "paths": {
-      "@styles/*": [
-        "src/styles/*"
+      "@payload-config": [
+        "src/payload.config.ts"
       ],
-      "@lib/*": [
-        "src/lib/*"
+      "@/*": [
+        "src/*"
       ]
     },
     "target": "ES2017"
@@ -35,9 +35,11 @@
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "migrate.js"  
+],
   "exclude": [
     "node_modules"
   ]
