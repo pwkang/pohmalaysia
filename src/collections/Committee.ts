@@ -35,8 +35,7 @@ export const Committee: CollectionConfig = {
         {
           name: 'title',
           label: 'Title',
-          type: 'relationship',
-          relationTo: 'roles',
+          type: 'text',
         },
         {
           name: 'members',

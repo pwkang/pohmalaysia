@@ -6,6 +6,9 @@ export const Member: CollectionConfig = {
     singular: 'Member',
   },
   slug: 'members',
+  admin: {
+    useAsTitle: 'name',
+  },
   fields: [
     {
       name: 'name',

@@ -237,7 +237,7 @@ export interface Committee {
   };
   committees?:
     | {
-        title?: (string | null) | Role;
+        title?: string | null;
         members?: (string | Member)[] | null;
         id?: string | null;
       }[]
