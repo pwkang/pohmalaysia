@@ -231,13 +231,10 @@ export interface Member {
 export interface Committee {
   id: string;
   name?: string | null;
-  year?:
-    | {
-        Start?: number | null;
-        End?: number | null;
-        id?: string | null;
-      }[]
-    | null;
+  year?: {
+    Start?: number | null;
+    End?: number | null;
+  };
   committees?:
     | {
         title?: (string | null) | Role;
@@ -452,7 +449,6 @@ export interface CommitteeSelect<T extends boolean = true> {
     | {
         Start?: T;
         End?: T;
-        id?: T;
       };
   committees?:
     | T

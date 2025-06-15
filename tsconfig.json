@@ -35,9 +35,11 @@
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, "migrate.js"  ],
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "migrate.js"  
+],
   "exclude": [
     "node_modules"
   ]

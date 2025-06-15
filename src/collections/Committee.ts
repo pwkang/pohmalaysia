@@ -15,7 +15,7 @@ export const Committee: CollectionConfig = {
     {
       name: 'year',
       label: 'Year',
-      type: 'array',
+      type: 'group',
       fields: [
         {
           name: 'Start',
