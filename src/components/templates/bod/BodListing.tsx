@@ -3,6 +3,7 @@ import { fetchBodPage } from '../../../api/bod';
 import Container from '../../Container';
 import Image from 'next/image';
 import config from '@/lib/config';
+import { Committee } from '@/payload-types';
 
 interface BodListingProps {
   slug: string;
@@ -10,7 +11,7 @@ interface BodListingProps {
 
 async function BodListing({ slug }: BodListingProps) {
   const bodPage = await fetchBodPage(slug);
-  const currentBods = bodPage.bods[0];
+  const session = bodPage.sessions[1];
 
   return (
     <Container className="px-4 py-10 mt-8">
@@ -21,12 +22,11 @@ async function BodListing({ slug }: BodListingProps) {
         height={86}
         className="mb-10"
       />
-      <h1 className="text-center mb-12">{currentBods?.name}</h1>
+      <h1 className="text-center mb-12">{bodPage.name}</h1>
       <div className="flex flex-wrap justify-center gap-8 px-10">
-        {currentBods?.committees.map((committee) => {
+        {isCommittee(session?.committees) && session?.committees.committees.map((committee) => {
           return (
             <Fragment key={`role-${committee.title}`}>
-              {committee.newRow && <hr className="w-full h-0 border-none" />}
               {committee.members.map(member => (
                 <div
                   className="rounded-xl overflow-hidden shadow-lg"
@@ -34,7 +34,7 @@ async function BodListing({ slug }: BodListingProps) {
                 >
                   <div className="relative w-40 h-48">
                     <Image
-                      alt={member.avatar?.alt}
+                      alt={member.avatar?.alt || member.name}
                       src={member.avatar?.url || config.noAvatarUrl}
                       fill
                       className="object-cover"
@@ -59,3 +59,7 @@ async function BodListing({ slug }: BodListingProps) {
 }
 
 export default BodListing;
+
+function isCommittee(committee?: Committee | string): committee is Committee {
+  return typeof committee === 'object' && 'id' in committee;
+}

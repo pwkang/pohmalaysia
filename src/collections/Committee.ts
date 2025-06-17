@@ -6,6 +6,9 @@ export const Committee: CollectionConfig = {
     singular: 'Committee',
   },
   slug: 'committee',
+  admin: {
+    useAsTitle: 'name',
+  },
   fields: [
     {
       name: 'name',
@@ -18,11 +21,13 @@ export const Committee: CollectionConfig = {
       type: 'group',
       fields: [
         {
-          name: 'Start',
+          name: 'start',
+          label: 'Start Year',
           type: 'number',
         },
         {
-          name: 'End',
+          name: 'end',
+          label: 'End Year',
           type: 'number',
         },
       ],

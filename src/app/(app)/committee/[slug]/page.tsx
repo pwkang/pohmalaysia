@@ -10,7 +10,8 @@ interface PageProps {
   };
 }
 
-function Page({ params: { slug } }: PageProps) {
+async function Page({ params }: PageProps) {
+  const { slug } = await params;
   return (
     <Layout>
       <BodListing slug={slug} />
@@ -26,8 +27,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { slug },
+  params,
 }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
   const { metaDescription, metaTitle } = await getBodPageMetadata(slug);
 
   return {

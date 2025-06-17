@@ -232,8 +232,8 @@ export interface Committee {
   id: string;
   name?: string | null;
   year?: {
-    Start?: number | null;
-    End?: number | null;
+    start?: number | null;
+    end?: number | null;
   };
   committees?:
     | {
@@ -265,7 +265,12 @@ export interface CommitteePage {
   slug?: string | null;
   metaTitle?: string | null;
   metaDescription?: string | null;
-  committees?: (string | Committee)[] | null;
+  sessions?:
+    | {
+        committees?: (string | null) | Committee;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -447,8 +452,8 @@ export interface CommitteeSelect<T extends boolean = true> {
   year?:
     | T
     | {
-        Start?: T;
-        End?: T;
+        start?: T;
+        end?: T;
       };
   committees?:
     | T
@@ -478,7 +483,12 @@ export interface CommitteePageSelect<T extends boolean = true> {
   slug?: T;
   metaTitle?: T;
   metaDescription?: T;
-  committees?: T;
+  sessions?:
+    | T
+    | {
+        committees?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

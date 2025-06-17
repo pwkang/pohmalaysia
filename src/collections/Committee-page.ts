@@ -28,11 +28,17 @@ export const CommitteePage: CollectionConfig = {
       type: 'text',
     },
     {
-      name: 'committees',
-      label: 'Committees',
-      type: 'relationship',
-      relationTo: 'committee',
-      hasMany: true,
+      name: 'sessions',
+      label: 'Sessions',
+      type: 'array',
+      fields: [
+        {
+          name: 'committees',
+          label: 'Committees',
+          type: 'relationship',
+          relationTo: 'committee',
+        },
+      ],
     },
   ],
 };
