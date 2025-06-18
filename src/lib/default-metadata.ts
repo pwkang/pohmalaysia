@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import config from '@lib/config';
-import { __PROD__ } from '@lib/utils';
+import config from '@/lib/config';
+import { __PROD__ } from '@/lib/utils';
 
 export const defaultMetadata: Metadata = {
   title: '马来西亚傅氏总会',
