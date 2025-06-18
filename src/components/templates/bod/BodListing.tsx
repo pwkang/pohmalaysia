@@ -29,18 +29,16 @@ async function BodListing({ slug }: BodListingProps) {
 
   return (
     <Container className="px-4 py-10 mt-8">
-      <div className="text-center mb-8">
-        <Image
-          src="/img/committee/t2.png"
-          alt="组织结构"
-          width={456}
-          height={86}
-          className="mx-auto mb-6"
-        />
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          {currentCommittee.name}
-        </h1>
-      </div>
+      <Image
+        src="/img/committee/t2.png"
+        alt="组织结构"
+        width={456}
+        height={86}
+        className="mb-6"
+      />
+      <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+        {currentCommittee.name}
+      </h1>
 
       <div className="space-y-2 px-4">
         {isCommittee(session?.committees) && session?.committees.committees?.map((committee) => {
