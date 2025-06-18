@@ -15,9 +15,7 @@ export const Media: CollectionConfig = {
       },
     },
   ],
-  admin: {
-    folders: true,
-  },
+  folders: true,
   upload: {
     imageSizes: [
       {
