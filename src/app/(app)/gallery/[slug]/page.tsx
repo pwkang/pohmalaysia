@@ -9,12 +9,13 @@ import {
 } from '@/api/gallery';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-async function Page({ params: { slug } }) {
+async function Page({ params }) {
+  const { slug } = await params;
   const gallery = await fetchGallery(slug);
 
   if (!gallery) {
@@ -41,7 +42,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const metadata = await fetchGalleryMetadata(params.slug);
+  const { slug } = await params;
+  const metadata = await fetchGalleryMetadata(slug);
 
   return {
     title: `${metadata?.metaTitle} | 马来西亚傅氏总会`,

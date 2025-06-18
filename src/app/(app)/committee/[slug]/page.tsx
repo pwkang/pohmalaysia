@@ -5,9 +5,9 @@ import { getBodPageMetadata, fetchBodSlugs } from '@/api/bod';
 import BodListing from '@/components/templates/bod/BodListing';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function Page({ params }: PageProps) {
