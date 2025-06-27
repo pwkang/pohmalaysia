@@ -1,11 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { links } from '@lib/links';
-import { navItems } from '@lib/navigation';
+import { links } from '@/lib/links';
+import { navItems } from '@/lib/navigation';
 import { FaSquareFacebook } from 'react-icons/fa6';
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
-import config from '@lib/config';
+import config from '@/lib/config';
 
 function Footer() {
   return (

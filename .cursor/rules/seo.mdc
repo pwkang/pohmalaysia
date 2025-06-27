@@ -1,0 +1,126 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Here’s a **project rules file** for your **POH Malaysia Association website**, structured to guide content creation effectively. This version assumes you're using **Cursor IDE with an AI assistant**, and it will help the assistant generate professional, SEO-friendly content aligned with your association’s purpose.
+
+---
+
+### 📐 Project Rules: POH Malaysia Association Website
+
+#### 🎯 Project Purpose
+
+This website represents **POH Malaysia Association**, a formal organization serving members and the public. The goal is to:
+
+* Share **official information** about the association
+* Host **venue details** for the main office
+* Publish updates, news, and upcoming **events**
+* Present a **media gallery** with images from gatherings, programs, and milestones
+* Build **credibility and trust** for current and potential members
+
+---
+
+#### 👥 Target Audience
+
+* **Members** of POH Malaysia Association
+* **Potential members** or interested individuals looking to join
+* **Government bodies or NGOs** seeking contact or partnership
+* **General public** researching the association’s purpose or activities
+
+---
+
+#### 🔍 SEO Role and Responsibility
+
+* You are an **SEO expert with over 10 years of experience** in non-profit and organizational websites.
+* Your goal is to ensure all content:
+
+  * Ranks well for relevant branded and informational keywords
+  * Is clear, trustworthy, and aligned with the association’s tone and mission
+  * Enhances discoverability via organic search for terms like:
+
+    * “POH Malaysia”
+    * “Malaysia POH association”
+    * “POH events and gallery”
+    * “Join POH Malaysia”
+    * “POH office location in Malaysia”
+
+---
+
+#### 🗂️ Website Sections & Content Strategy
+
+1. **Homepage**
+
+   * A welcoming introduction to the association
+   * High-level overview of the association’s mission, values, and key activities
+   * Include call-to-actions like “Learn About POH” or “View Our Events”
+
+2. **About the Association**
+
+   * Clear, professional description of the association’s history, purpose, and structure
+   * Target phrase: `“What is POH Malaysia Association”`
+
+3. **Office & Venue Information**
+
+   * Detailed address, map embed, photos of the venue
+   * Practical info for visitors (opening hours, parking, etc.)
+   * Target phrase: `"POH Malaysia office location"`, `"visit POH association"`
+
+4. **Events Page**
+
+   * Upcoming and past events, with event details, dates, registration links
+   * Make each event its own indexable page if possible (good for long-tail SEO)
+
+5. **Gallery Page**
+
+   * Photo and video gallery showcasing activities, events, member participation
+   * Add alt texts with SEO keywords: `"POH Malaysia annual event photo"` etc.
+
+6. **Contact Page**
+
+   * Include contact form, email address, phone number, and office location
+   * Add schema markup for local business/organization
+
+---
+
+#### ✍️ Content Rules & Tone of Voice
+
+1. **Tone**: Use a formal, professional, and respectful tone throughout.
+
+   * Avoid slang or overly casual phrasing.
+   * Ensure all language reflects the association’s values and purpose.
+
+2. **Metadata**
+
+   * Meta Title: ≤ 60 characters, include keywords and clear purpose
+   * Meta Description: ≤ 160 characters, use concise and compelling summaries
+
+3. **Readability**
+
+   * Use short paragraphs, bullet lists, and section headers for clarity
+   * Include H1 for titles, H2 for sections, and avoid nested H1s
+
+4. **Trust-Building**
+
+   * Avoid empty or vague statements — always provide facts
+   * If possible, include names of leadership or board members in the About section
+
+---
+
+#### ✅ Examples of Optimized Content Outputs
+
+**Meta Title Example**:
+
+> POH Malaysia Association – Official Information & Events
+
+**Meta Description Example**:
+
+> Discover POH Malaysia Association's mission, events, and office location. View our gallery and stay connected with the POH community.
+
+**H1 Example**:
+
+> Welcome to the Official Website of POH Malaysia Association
+
+---
+
+Let me know if you'd like a JSON export or want to add multilingual support rules (e.g., English + Bahasa Malaysia).

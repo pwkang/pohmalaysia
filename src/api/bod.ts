@@ -1,56 +1,42 @@
-import { fetchStrapi } from '@lib/strapi-graphql';
-import { gql } from 'graphql-request';
-import { BodPage } from '../@types/bodPage';
+import { getPayloadClient } from '@/lib/utils';
+import { CommitteePage } from '@/payload-types';
 
 export const fetchBodPage = async (slug: string) => {
-  const councils = await fetchStrapi(gql`
-      query BodPages {
-          bodPages(filters: { slug: { eq: "${slug}" } }) {
-              name
-              slug
-              bods {
-                  name
-                  year {
-                      start
-                      end
-                  }
-                  committees(pagination: { pageSize: 50 }) {
-                      title
-                      newRow
-                      members {
-                          name
-                          avatar {
-                              url
-                          }
-                      }
-                  }
-              }
-          }
-      }
-  `);
+  const payload = await getPayloadClient();
+  const committeePage = await payload.find({
+    collection: 'committee-page',
+    where: {
+      slug: { equals: slug },
+    },
+    depth: 3,
+  });
 
-  return councils.bodPages[0] as BodPage;
+  return committeePage.docs[0] as CommitteePage;
 };
 
 export const fetchBodSlugs = async () => {
-  const bodSlugs = await fetchStrapi(gql`
-    query BodPages {
-      bodPages {
-        slug
-      }
-    }
-  `);
+  const payload = await getPayloadClient();
+  const committeeSlugs = await payload.find({
+    collection: 'committee-page',
+    select: {
+      slug: true,
+    },
+  });
 
-  return bodSlugs.bodPages.map(page => page.slug) as string[];
+  return committeeSlugs.docs.map(page => page.slug) as string[];
 };
 
 export const getBodPageMetadata = async (slug: string) => {
-  const bodPage = await fetchStrapi(gql`
-    query BodPages {
-      bodPages(filters: { slug: { eq: "${slug}" } }) {
-        metaTitle
-        metaDescription
-      }
-    }`);
-  return bodPage.bodPages[0] as Pick<BodPage, 'metaDescription' | 'metaTitle'>;
+  const payload = await getPayloadClient();
+  const committeePage = await payload.find({
+    collection: 'committee-page',
+    where: {
+      slug: { equals: slug },
+    },
+    select: {
+      metaTitle: true,
+      metaDescription: true,
+    },
+  });
+  return committeePage.docs[0] as Pick<CommitteePage, 'metaDescription' | 'metaTitle'>;
 };

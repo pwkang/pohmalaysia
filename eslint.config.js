@@ -7,6 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import plugin from '@next/eslint-plugin-next';
 import react from 'eslint-plugin-react';
+import { globalIgnores } from 'eslint/config';
 
 /**
  * @type {import('eslint').Linter.Config}
@@ -19,8 +20,9 @@ export default [
     jsx: true,
   }),
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
   },
+  globalIgnores(['src/migrations/**']),
   ...tseslint.configs.recommended,
   pluginJs.configs.recommended,
   {
