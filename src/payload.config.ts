@@ -42,6 +42,9 @@ export default buildConfig({
       dbName: 'pohmalaysia',
     },
   }),
+  folders: {
+
+  },
   // database-adapter-config-end
   sharp,
   plugins: [

@@ -20,7 +20,7 @@ export default [
     jsx: true,
   }),
   {
-    files: ['**/*.ts', '**/*.tsx', 'src/**/*.js', 'src/**/*.jsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
   },
   globalIgnores(['src/migrations/**']),
   ...tseslint.configs.recommended,

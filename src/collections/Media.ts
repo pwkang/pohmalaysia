@@ -15,7 +15,9 @@ export const Media: CollectionConfig = {
       },
     },
   ],
-  folders: true,
+  folders: {
+    browseByFolder: true,
+  },
   upload: {
     imageSizes: [
       {
