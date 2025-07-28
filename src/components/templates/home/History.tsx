@@ -1,11 +1,10 @@
-import React from 'react';
-import Container from '../../Container';
 import Image from 'next/image';
 import Link from 'next/link';
+import Container from '../../Container';
 
 function History() {
   return (
-    <Container className="mt-8 text-lg p-4 [&>p]:mb-6 text-gray-600">
+    <Container className="mt-8 p-4 text-gray-600 text-lg [&>p]:mb-6">
       <div className="mb-8">
         <Image src="/img/home/t1.png" alt="总会简史" width={456} height={86} />
       </div>
@@ -64,9 +63,7 @@ function History() {
       <p>
         为了庆祝公会成立一周年纪念庆典宴会，众理事们不辞劳苦四处拜访宗亲报效酒席与乐捐。当晚的庆典宴会共开十余桌，筹得经费九千多令吉，扣除开销尚获得RM4,200，初步解决经费的问题，会务同时展开。
       </p>
-      <p>
-        1977年，公会迁离第一座位于惹兰亚石的临时会所，搬到怡保路门牌264号四楼，月租RM300。
-      </p>
+      <p>1977年，公会迁离第一座位于惹兰亚石的临时会所，搬到怡保路门牌264号四楼，月租RM300。</p>
       <p>
         购买本身的公会会所一直是理事会们的第一要务与心愿，在庆祝公会二周年纪念晚宴中，第二届会长成基宗长，毅然宣布建委会小组，于是理事们又开始拟定筹划购置会所计划，并积极展开筹募建立会所基金活动。
       </p>
@@ -101,7 +98,7 @@ function History() {
         1983年12月11日，新厦完成接管，二楼保留为公会自用，1984年3月4日星期天，是我傅氏公会迁入永久会所的重要日子，名副其实的乔迁之喜。在同年8月3日星期五的良辰吉日，也是傅氏公会成立九周年纪念，在瑞狮呈祥的热闹锣鼓声中，公会举行会所落成典礼，恭请其时雪兰莪大会堂主席邱祥炽先生主持开幕礼。受邀请前来参加盛典的除了本国各姓氏公会代表与宗亲，还有远道而来台湾、香港、新马各地区的賴罗傅宗亲会代表，场面热闹非凡，呈现“一家亲”精神，并在当晚假安邦路北京酒楼庆祝公会成立九周年，筵开六十席，气氛热闹隆重融洽。
       </p>
       <div className="grid grid-cols-3 space-x-8">
-        <div className="[&>p]:mb-6 col-span-3 lg:col-span-2">
+        <div className="col-span-3 lg:col-span-2 [&>p]:mb-6">
           <p>
             在公会庆祝十周年时，公会规模已具，活动加强，有青年组与妇女组，颁发奖励金给宗亲子弟，如今不仅我傅姓子弟可以获得，会员的子女也一样可以获得奖励金。全公会也经常举办各种文娱文化学体育活动。
           </p>
@@ -119,35 +116,31 @@ function History() {
             在今天傅氏公会成立四十周年，前辈宗长先贤的咐证明是真正的金玉良言，仍然是现任理事会要传灯给下一代傅氏后人接收的。理事会代表所有会员宗亲，再一次恭敬的给前辈先贤深深的鞠躬：谢谢！谢谢！前辈的功绩，我们世代会员永志不忘。
           </p>
         </div>
-        <div className="col-span-3 lg:col-span-1 relative flex justify-center items-start">
-          <Link
-            href="/file/2015 Poh Association.pdf"
-            className="overflow-hidden"
-            target="_blank"
-          >
+        <div className="relative col-span-3 flex items-start justify-center lg:col-span-1">
+          <Link href="/file/2015 Poh Association.pdf" className="overflow-hidden" target="_blank">
             <Image
               src="/img/home/m1.jpg"
               alt=""
-              className="object-contain cursor-pointer hover:scale-105 transition-transform duration-150"
+              className="cursor-pointer object-contain transition-transform duration-150 hover:scale-105"
               width={500}
               height={678}
             />
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-4 w-full gap-2 mt-8">
+      <div className="mt-8 grid w-full grid-cols-4 gap-2">
         {Array.from({ length: 16 }).map((_, index) => (
           <div
             key={`history_${index}`}
-            className="h-48 relative border-2 overflow-hidden cursor-zoom-in group"
+            className="group relative h-48 cursor-zoom-in overflow-hidden border-2"
           >
             <Image
               alt={`history ${index}`}
               src={`/img/home/history/p${index + 1}.jpg`}
               fill
-              className="object-cover group-hover:scale-125 transition-transform duration-300"
+              className="object-cover transition-transform duration-300 group-hover:scale-125"
             />
-            <div className="absolute w-full h-full group-hover:bg-black/40" />
+            <div className="absolute h-full w-full group-hover:bg-black/40" />
           </div>
         ))}
       </div>

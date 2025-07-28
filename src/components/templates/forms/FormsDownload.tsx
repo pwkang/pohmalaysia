@@ -1,7 +1,6 @@
-import React from 'react';
-import Container from '../../Container';
 import Image from 'next/image';
 import Link from 'next/link';
+import Container from '../../Container';
 
 const mainForms = [
   '會員入會申請表格',
@@ -24,38 +23,28 @@ const branchForms = [
 
 function FormsDownload() {
   return (
-    <Container className="p-4 mt-8">
+    <Container className="mt-8 p-4">
       <Image src="/img/forms/t5.png" alt="表格下载区" width={456} height={86} />
-      <h1 className="text-center mt-4">总会表格</h1>
-      {mainForms.map(form => (
+      <h1 className="mt-4 text-center">总会表格</h1>
+      {mainForms.map((form) => (
         <div
           key={form}
-          className="flex px-4 justify-between items-center hover:bg-gray-200 mt-1 py-1"
+          className="mt-1 flex items-center justify-between px-4 py-1 hover:bg-gray-200"
         >
           <p>{form}</p>
-          <Link
-            href={`/file/forms/${form}.pdf`}
-            target="_blank"
-            className="text-blue-500"
-            download
-          >
+          <Link href={`/file/forms/${form}.pdf`} target="_blank" className="text-blue-500" download>
             下载
           </Link>
         </div>
       ))}
-      <h1 className="text-center mt-8">属会表格</h1>
-      {branchForms.map(form => (
+      <h1 className="mt-8 text-center">属会表格</h1>
+      {branchForms.map((form) => (
         <div
           key={form}
-          className="flex px-4 justify-between items-center hover:bg-gray-200 mt-1 py-1"
+          className="mt-1 flex items-center justify-between px-4 py-1 hover:bg-gray-200"
         >
           <p>{form}</p>
-          <Link
-            href={`/file/forms/${form}.pdf`}
-            target="_blank"
-            className="text-blue-500"
-            download
-          >
+          <Link href={`/file/forms/${form}.pdf`} target="_blank" className="text-blue-500" download>
             下载
           </Link>
         </div>

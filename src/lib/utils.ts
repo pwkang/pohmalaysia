@@ -1,4 +1,4 @@
-import classNames, { Argument } from 'classnames';
+import classNames, { type Argument } from 'classnames';
 import { getPayload } from 'payload';
 import { twMerge } from 'tw-merge';
 import config from '@/payload.config';

@@ -1,7 +1,6 @@
-import React from 'react';
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
 import GalleryListing from '@/components/templates/gallery/GalleryListing';
-import { Metadata } from 'next';
 import { defaultMetadata } from '@/lib//default-metadata';
 
 function Page() {

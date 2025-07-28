@@ -1,8 +1,7 @@
-import React from 'react';
-import { Metadata } from 'next';
-import { defaultMetadata } from '@/lib//default-metadata';
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
 import About from '@/components/templates/poh-about/About';
+import { defaultMetadata } from '@/lib//default-metadata';
 
 function Page() {
   return (

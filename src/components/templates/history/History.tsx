@@ -1,21 +1,14 @@
-import React from 'react';
-import Container from '../../Container';
 import Image from 'next/image';
 import Link from 'next/link';
+import Container from '../../Container';
 
 function History() {
   return (
-    <Container className="mt-8 text-lg p-4 [&>p]:mb-6 text-gray-600 max-w-5xl mx-auto">
+    <Container className="mx-auto mt-8 max-w-5xl p-4 text-gray-600 text-lg [&>p]:mb-6">
       <div className="mb-8 text-center">
         {/* <h1 className="text-3xl font-bold text-blue-800 mb-4 font-cn">总会简史</h1>
         <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div> */}
-        <Image
-          src="/img/home/t1.png"
-          alt="总会简史"
-          width={456}
-          height={86}
-          className="mx-auto"
-        />
+        <Image src="/img/home/t1.png" alt="总会简史" width={456} height={86} className="mx-auto" />
       </div>
 
       <div className="prose prose-lg max-w-none">
@@ -23,7 +16,7 @@ function History() {
           在我国独立后万象更新，大马乡团与宗亲组织如雨后春笋纷纷成立。宗族乡团的小团结已扩张到整个华社大团结。华裔社会能有今天巩固的组织基础，宗族乡团在这方面发挥的作用是无可置疑的。宗亲会也让华裔宗亲在聚集时，汇集大家的力量，发挥宗亲守望相助的精神。这种血缘性宗亲会与各联谊性公会，在促进华裔社会发展领域，扮演了重要的角色，为我国进步繁荣尽国民的义务与力量。一时在全国各地纷纷成立。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">公会成立</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">公会成立</h2>
 
         <p>
           在1975年成立的傅氏公会，也是在这样的情况下,
@@ -39,7 +32,7 @@ function History() {
           在这里，我们从公会成立十周年纪念特刊中的"会史概述"与"会务概况"二文，重温旧事，让新一代的宗亲能对公会历史有更多的了解。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">筹备阶段</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">筹备阶段</h2>
 
         <p>
           85年特刊里的"会史概述"叙述（改写）如下。在马亚西来傅氏公会成立前，炳祥宗长、国才宗长、文圶宗长与孙賜宗长等人，一次联袂出席槟城傅氏宗祠的春祭晚宴后，在回返吉隆坡途中，国才宗长提出说既然槟城都能成立一个等同傅氏宗亲组的傳氏宗祠，全国傅氏宗亲成立一个傅氏公会应该是可行的事。这项建议当场就得炳祥宗长热烈支持。四位热心的宗长在回到首都后，立即四出拜访已知的傅氏宗亲，提出成立傅氏公会的概念，鼓励大家发挥团结就是力量的精神，为我傅氏成立公会。幸运的获得许多有识见的宗亲踊跃回应。
@@ -62,7 +55,7 @@ function History() {
           以实际的行动筹组公会。傅子荆宗长誓言会在精神上与物质上鼎力持。席间执委慷慨解囊当场筹获RM682活动经费。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">正式成立</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">正式成立</h2>
 
         <p>
           座谈会中也参考槟城傅氏宗祠章程，拟定一份公会章程，由筹委会先以《马来西亚傳氏公会》名义中请成立，由宪章与清义两位宗长负责中请注册，后因为注册局不批准才改用雪兰莪傳氏公会名称申请。较后、终于成功的正名为如今的《马来西亚傅氏公会》。
@@ -78,7 +71,7 @@ function History() {
           RM1,300。宗长们爱护公会的精神令后辈永远不会忘怀。同年9月7日召开第一次会员大会，选出1975至1977年的第一届理事会。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">会务发展</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">会务发展</h2>
 
         <p>
           在第一届理事会成立后，即刻展开筹划经费活动，各宗亲也热烈响应充份发挥了宗亲们爱护公会的崇高精神与心意。只是仍然不足以应付开销,
@@ -98,11 +91,9 @@ function History() {
           为了庆祝公会成立一周年纪念庆典宴会，众理事们不辞劳苦四处拜访宗亲报效酒席与乐捐。当晚的庆典宴会共开十余桌，筹得经费九千多令吉，扣除开销尚获得RM4,200，初步解决经费的问题，会务同时展开。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">会所建设</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">会所建设</h2>
 
-        <p>
-          1977年，公会迁离第一座位于惹兰亚石的临时会所，搬到怡保路门牌264号四楼，月租RM300。
-        </p>
+        <p>1977年，公会迁离第一座位于惹兰亚石的临时会所，搬到怡保路门牌264号四楼，月租RM300。</p>
 
         <p>
           购买本身的公会会所一直是理事会们的第一要务与心愿，在庆祝公会二周年纪念晚宴中，第二届会长成基宗长，毅然宣布建委会小组，于是理事们又开始拟定筹划购置会所计划，并积极展开筹募建立会所基金活动。
@@ -148,9 +139,9 @@ function History() {
           1983年12月11日，新厦完成接管，二楼保留为公会自用，1984年3月4日星期天，是我傅氏公会迁入永久会所的重要日子，名副其实的乔迁之喜。在同年8月3日星期五的良辰吉日，也是傅氏公会成立九周年纪念，在瑞狮呈祥的热闹锣鼓声中，公会举行会所落成典礼，恭请其时雪兰莪大会堂主席邱祥炽先生主持开幕礼。受邀请前来参加盛典的除了本国各姓氏公会代表与宗亲，还有远道而来台湾、香港、新马各地区的賴罗傅宗亲会代表，场面热闹非凡，呈现"一家亲"精神，并在当晚假安邦路北京酒楼庆祝公会成立九周年，筵开六十席，气氛热闹隆重融洽。
         </p>
 
-        <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 font-cn">传承发展</h2>
+        <h2 className="mt-8 mb-4 font-bold font-cn text-2xl text-blue-700">传承发展</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6 mb-8">
+        <div className="mt-6 mb-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <p>
               在公会庆祝十周年时，公会规模已具，活动加强，有青年组与妇女组，颁发奖励金给宗亲子弟，如今不仅我傅姓子弟可以获得，会员的子女也一样可以获得奖励金。全公会也经常举办各种文娱文化学体育活动。
@@ -174,16 +165,12 @@ function History() {
             </p>
           </div>
 
-          <div className="relative flex justify-center items-start">
-            <Link
-              href="/file/2015 Poh Association.pdf"
-              className="overflow-hidden"
-              target="_blank"
-            >
+          <div className="relative flex items-start justify-center">
+            <Link href="/file/2015 Poh Association.pdf" className="overflow-hidden" target="_blank">
               <Image
                 src="/img/home/m1.jpg"
                 alt="2015年特刊"
-                className="object-contain cursor-pointer hover:scale-105 transition-transform duration-150 rounded-lg shadow-md"
+                className="cursor-pointer rounded-lg object-contain shadow-md transition-transform duration-150 hover:scale-105"
                 width={500}
                 height={678}
               />
@@ -193,20 +180,20 @@ function History() {
       </div>
 
       <div className="mt-12 mb-8">
-        <h2 className="text-2xl font-bold text-blue-700 mb-6 font-cn">历史照片</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <h2 className="mb-6 font-bold font-cn text-2xl text-blue-700">历史照片</h2>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {Array.from({ length: 16 }).map((_, index) => (
             <div
               key={`history_${index}`}
-              className="aspect-square relative border-2 overflow-hidden cursor-zoom-in group rounded-lg shadow-md"
+              className="group relative aspect-square cursor-zoom-in overflow-hidden rounded-lg border-2 shadow-md"
             >
               <Image
                 alt={`history ${index}`}
                 src={`/img/home/history/p${index + 1}.jpg`}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-300"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute w-full h-full group-hover:bg-black/40 transition-all duration-300" />
+              <div className="absolute h-full w-full transition-all duration-300 group-hover:bg-black/40" />
             </div>
           ))}
         </div>

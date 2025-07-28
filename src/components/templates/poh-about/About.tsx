@@ -1,16 +1,10 @@
-import React from 'react';
-import Container from '../../Container';
 import Image from 'next/image';
+import Container from '../../Container';
 
 function About() {
   return (
     <Container className="mt-8 p-4 [&>p]:mb-4">
-      <Image
-        src="/img/poh-about/t8.png"
-        alt="傅氏缘起"
-        width={456}
-        height={86}
-      />
+      <Image src="/img/poh-about/t8.png" alt="傅氏缘起" width={456} height={86} />
       <h5>傅氏精神</h5>
       <p>
         忠，从中，从心；本义作“敬”解，见《说文》，古以不懈于心为敬；必尽心任事始能不懈于位；故忠从心。又以中有不偏不倚之意，忠为正直之德，故从中声。
@@ -49,22 +43,12 @@ function About() {
       <p>
         以傅说为世界全球傅姓人氏的始祖，已经是不争的定论。不过以前的姓氏学者也有人把傅姓的始源追溯得更远，像《唐书》的“宰相世系表”便指出“出姬姓，黄帝裔孙大田，封于傅邑，因以为氏。”据这个说法，则傅姓与周文王的姬姓一支不但同源，而且发迹得更早，绝对是一个源流远、历史久的古老家族。
       </p>
-      <div className="flex gap-8 mb-4">
+      <div className="mb-4 flex gap-8">
         <div>
-          <Image
-            src="/img/poh-about/origins1.jpg"
-            alt="傅氏始祖 - 说公"
-            width={800}
-            height={905}
-          />
+          <Image src="/img/poh-about/origins1.jpg" alt="傅氏始祖 - 说公" width={800} height={905} />
         </div>
         <div>
-          <Image
-            src="/img/poh-about/origins2.jpg"
-            alt="银青公 - 傅实"
-            width={800}
-            height={905}
-          />
+          <Image src="/img/poh-about/origins2.jpg" alt="银青公 - 傅实" width={800} height={905} />
         </div>
       </div>
       <h5>历史传奇人物—傅说 奴隶 宰相 傅圣</h5>

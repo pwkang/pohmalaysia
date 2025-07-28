@@ -1,4 +1,3 @@
-import React from 'react';
 import Script from 'next/script';
 import { __PROD__ } from '@/lib/utils';
 

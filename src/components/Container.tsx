@@ -1,5 +1,5 @@
-import React from 'react';
 import cn from 'classnames';
+import type React from 'react';
 
 interface ContainerProps {
   className?: string;
@@ -8,11 +8,7 @@ interface ContainerProps {
 
 function Container({ className, children }: ContainerProps) {
   return (
-    <div
-      className={cn('max-w-[90%] w-5xl m-auto bg-white rounded-3xl', className)}
-    >
-      {children}
-    </div>
+    <div className={cn('m-auto w-5xl max-w-[90%] rounded-3xl bg-white', className)}>{children}</div>
   );
 }
 

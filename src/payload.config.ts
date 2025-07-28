@@ -1,23 +1,24 @@
 // storage-adapter-import-placeholder
+
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import path from 'path';
-import { buildConfig } from 'payload';
-import { fileURLToPath } from 'url';
-import sharp from 'sharp';
 import dotenv from 'dotenv';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
 
 dotenv.config();
 
-import { Users } from './collections/Users';
-import { Media } from './collections/Media';
-import { Member } from './collections/Member';
-import { Committee } from './collections/Committee';
-import { Role } from './collections/Role';
 import { s3Storage } from '@payloadcms/storage-s3';
+import { Committee } from './collections/Committee';
 import { CommitteePage } from './collections/Committee-page';
 import { Gallery } from './collections/Gallery';
+import { Media } from './collections/Media';
+import { Member } from './collections/Member';
+import { Role } from './collections/Role';
+import { Users } from './collections/Users';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -42,9 +43,7 @@ export default buildConfig({
       dbName: 'pohmalaysia',
     },
   }),
-  folders: {
-
-  },
+  folders: {},
   // database-adapter-config-end
   sharp,
   plugins: [

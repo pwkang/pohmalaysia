@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 
 interface President {
@@ -92,24 +91,26 @@ function PastChairmanListing() {
     <div className="container mx-auto px-4 py-16">
       {/* Modern header section */}
       <div className="mb-16">
-        <h1 className="text-4xl font-bold mb-2 font-cn bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">历届会长</h1>
-        <p className="text-gray-600 max-w-3xl">
+        <h1 className="mb-2 bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text font-bold font-cn text-4xl text-transparent">
+          历届会长
+        </h1>
+        <p className="max-w-3xl text-gray-600">
           自1975年马来西亚傅氏公会成立以来，历届会长带领公会不断发展壮大，为宗亲服务，传承傅氏精神。
         </p>
       </div>
 
       {/* Current Chairman Feature Section */}
       <div className="mb-20">
-        <div className="flex items-center mb-8">
-          <h2 className="text-2xl font-bold font-cn text-gray-800">现任会长</h2>
-          <div className="h-[1px] bg-gradient-to-r from-indigo-500 to-transparent flex-grow ml-4"></div>
+        <div className="mb-8 flex items-center">
+          <h2 className="font-bold font-cn text-2xl text-gray-800">现任会长</h2>
+          <div className="ml-4 h-[1px] flex-grow bg-gradient-to-r from-indigo-500 to-transparent"></div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="overflow-hidden rounded-lg bg-white shadow-lg">
           <div className="flex flex-col md:flex-row">
             {/* Image section */}
-            <div className="md:w-1/3 bg-gradient-to-br from-indigo-50 to-blue-50 p-8 flex items-center justify-center">
-              <div className="relative w-48 h-64 overflow-hidden">
+            <div className="flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 p-8 md:w-1/3">
+              <div className="relative h-64 w-48 overflow-hidden">
                 <Image
                   src={`/img/home/past_chairman/chairman${presidentList.length}.jpg`}
                   alt={`${currentChairman.name}宗长`}
@@ -122,21 +123,21 @@ function PastChairmanListing() {
             </div>
 
             {/* Content section */}
-            <div className="md:w-2/3 p-8">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <h3 className="text-3xl font-bold font-cn text-gray-800">{currentChairman.name}</h3>
-                <div className="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm font-medium rounded-full">
+            <div className="p-8 md:w-2/3">
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <h3 className="font-bold font-cn text-3xl text-gray-800">{currentChairman.name}</h3>
+                <div className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-700 text-sm">
                   {currentChairman.placeString}
                 </div>
-                <div className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full">
+                <div className="rounded-full bg-blue-50 px-3 py-1 text-blue-700 text-sm">
                   {currentChairman.term}
                 </div>
-                <div className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                <div className="rounded-full bg-gray-100 px-3 py-1 text-gray-700 text-sm">
                   {currentChairman.year}
                 </div>
               </div>
 
-              <p className="text-gray-600 mb-6">{currentChairman.bio}</p>
+              <p className="mb-6 text-gray-600">{currentChairman.bio}</p>
             </div>
           </div>
         </div>
@@ -144,26 +145,21 @@ function PastChairmanListing() {
 
       {/* Past Chairmen Section */}
       <div>
-        <div className="flex items-center mb-8">
-          <h2 className="text-2xl font-bold font-cn text-gray-800">历届会长</h2>
-          <div className="h-[1px] bg-gradient-to-r from-indigo-500 to-transparent flex-grow ml-4"></div>
+        <div className="mb-8 flex items-center">
+          <h2 className="font-bold font-cn text-2xl text-gray-800">历届会长</h2>
+          <div className="ml-4 h-[1px] flex-grow bg-gradient-to-r from-indigo-500 to-transparent"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pastChairmen.map(president => (
-            <div
-              key={president.year}
-              className="group"
-            >
-              <div
-                className="bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-all duration-300 h-full flex flex-col"
-              >
-                <div className="p-5 flex items-start gap-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {pastChairmen.map((president) => (
+            <div key={president.year} className="group">
+              <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow transition-all duration-300 hover:shadow-md">
+                <div className="flex items-start gap-4 p-5">
                   {/* Image */}
                   <div className="flex-shrink-0">
-                    <div className="relative w-20 h-24 overflow-hidden bg-gray-50 rounded">
+                    <div className="relative h-24 w-20 overflow-hidden rounded bg-gray-50">
                       <Image
-                        src={`/img/home/past_chairman/chairman${presidentList.findIndex(p => p.name === president.name) + 1}.jpg`}
+                        src={`/img/home/past_chairman/chairman${presidentList.findIndex((p) => p.name === president.name) + 1}.jpg`}
                         alt={`${president.name}宗长`}
                         width={100}
                         height={120}
@@ -175,13 +171,13 @@ function PastChairmanListing() {
 
                   {/* Content */}
                   <div className="flex-grow">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <h3 className="text-lg font-bold font-cn text-gray-800">{president.name}</h3>
-                      <div className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-full">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <h3 className="font-bold font-cn text-gray-800 text-lg">{president.name}</h3>
+                      <div className="rounded-full bg-indigo-50 px-2 py-0.5 text-indigo-600 text-xs">
                         {president.placeString}
                       </div>
                     </div>
-                    <div className="flex gap-2 text-xs text-gray-500 mb-2">
+                    <div className="mb-2 flex gap-2 text-gray-500 text-xs">
                       <span>{president.term}</span>
                       <span>•</span>
                       <span>{president.year}</span>

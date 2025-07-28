@@ -1,11 +1,6 @@
-import React from 'react';
+import { fetchGallery, fetchGalleryMetadata, fetchGallerySlugs } from '@/api/gallery';
 import Layout from '@/components/layout/layout';
 import GalleryImages from '@/components/templates/gallery/GalleryImages';
-import {
-  fetchGallery,
-  fetchGalleryMetadata,
-  fetchGallerySlugs,
-} from '@/api/gallery';
 
 interface PageProps {
   params: Promise<{
@@ -23,18 +18,14 @@ async function Page({ params }) {
 
   return (
     <Layout>
-      <GalleryImages
-        title={gallery.title}
-        date={gallery.date}
-        images={gallery.images}
-      />
+      <GalleryImages title={gallery.title} date={gallery.date} images={gallery.images} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
   const slugs = await fetchGallerySlugs();
-  return slugs.map(slug => ({
+  return slugs.map((slug) => ({
     slug,
   }));
 }

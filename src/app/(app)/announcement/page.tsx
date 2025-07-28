@@ -1,8 +1,7 @@
-import React from 'react';
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
-import { defaultMetadata } from '@/lib//default-metadata';
-import { Metadata } from 'next';
 import AnnouncementListing from '@/components/templates/announcement/AnnouncementListing';
+import { defaultMetadata } from '@/lib//default-metadata';
 
 function Page() {
   return (
