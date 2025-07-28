@@ -28,7 +28,7 @@ function NavItem({ name, href }: NavItemProps) {
   return (
     <Link
       href={href}
-      className={cn('w-full p-4 transition-colors rounded-md my-1', {
+      className={cn('w-full px-4 py-2 transition-colors rounded-md my-1', {
         'bg-blue-500 text-white': isActive,
         'text-neutral-700 hover:bg-gray-100': !isActive,
       })}
@@ -52,11 +52,11 @@ function NavDropdown({ name, items }: NavDropdownProps) {
   return (
     <Accordion.Root type="single" collapsible className="w-full">
       <Accordion.Item value={name} className="my-1 rounded-md overflow-hidden">
-        <Accordion.Trigger className="w-full p-4 cursor-pointer flex justify-between items-center text-neutral-700 hover:bg-gray-100 transition-colors rounded-md">
+        <Accordion.Trigger className="w-full px-4 py-2 cursor-pointer flex justify-between items-center text-neutral-700 hover:bg-gray-100 transition-colors rounded-md">
           <span>{name}</span>
           <HiChevronDown className="transition-transform duration-300 ease-in-out data-[state=open]:rotate-180" />
         </Accordion.Trigger>
-        <Accordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp bg-gray-50 rounded-b-md">
+        <Accordion.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp bg-gray-50 rounded-b-md ps-4">
           {items.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -64,7 +64,7 @@ function NavDropdown({ name, items }: NavDropdownProps) {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'block w-full p-4 transition-colors',
+                  'block w-full px-4 py-2 transition-colors',
                   {
                     'bg-blue-500 text-white': isActive,
                     'text-neutral-700 hover:bg-gray-100': !isActive,
@@ -89,11 +89,7 @@ function MobileNav() {
   return (
     <>
       <button
-        className={cn(
-          'p-2 rounded-full transition-all duration-300',
-          'group-data-[scrolled="true"]:bg-gray-100 group-data-[scrolled="true"]:text-blue-700 group-data-[scrolled="true"]:hover:bg-gray-200',
-          'bg-white/10 text-white hover:bg-white/20',
-        )}
+        className="p-2 rounded-full transition-all duration-300 bg-gray-100 text-blue-700 hover:bg-gray-200"
         onClick={toggle}
         aria-label="Menu"
       >
@@ -115,10 +111,10 @@ function MobileNav() {
 
               {/* Slide-in menu */}
               <motion.div
-                className="fixed top-0 right-0 h-screen w-[85%] max-w-[350px] bg-gradient-to-br from-white to-blue-50 shadow-xl z-[1000] overflow-y-auto"
-                initial={{ x: '100%' }}
+                className="fixed top-0 left-0 h-screen w-[85%] max-w-[350px] bg-gradient-to-br from-white to-blue-50 shadow-xl z-[1000] overflow-y-auto"
+                initial={{ x: '-100%' }}
                 animate={{ x: 0 }}
-                exit={{ x: '100%' }}
+                exit={{ x: '-100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               >
                 {/* Header */}

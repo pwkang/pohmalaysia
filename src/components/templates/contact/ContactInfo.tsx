@@ -104,7 +104,7 @@ function ContactInfo() {
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <div className="flex items-center gap-2 mb-6">
             <div className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Coming Soon</div>
-            <h2 className="text-2xl font-bold">Office Location (Upcoming)</h2>
+            <h2 className="text-2xl font-bold">Office Location 🚧</h2>
           </div>
 
           <div className="flex items-start gap-3 mb-4">

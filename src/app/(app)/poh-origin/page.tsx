@@ -2,13 +2,11 @@ import React from 'react';
 import { Metadata } from 'next';
 import { defaultMetadata } from '@/lib//default-metadata';
 import Layout from '@/components/layout/layout';
-import HeroSlider from '@/components/layout/HeroSlider';
 import About from '@/components/templates/poh-about/About';
 
 function Page() {
   return (
     <Layout>
-      <HeroSlider />
       <About />
     </Layout>
   );
