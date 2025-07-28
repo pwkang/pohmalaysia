@@ -1,7 +1,6 @@
-import React from 'react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { fetchBodSlugs, getBodPageMetadata } from '@/api/bod';
 import Layout from '@/components/layout/layout';
-import { getBodPageMetadata, fetchBodSlugs } from '@/api/bod';
 import BodListing from '@/components/templates/bod/BodListing';
 
 interface PageProps {
@@ -21,14 +20,12 @@ async function Page({ params }: PageProps) {
 
 export async function generateStaticParams() {
   const slugs = await fetchBodSlugs();
-  return slugs.map(slug => ({
+  return slugs.map((slug) => ({
     slug,
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const { metaDescription, metaTitle } = await getBodPageMetadata(slug);
 

@@ -7,7 +7,10 @@
     "dev": "next dev --port 4317 --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "biome check --write .",
+    "lint:check": "biome check .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "prepare": "husky",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload"
   },
@@ -39,32 +42,23 @@
     "tw-merge": "^0.0.1-alpha.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.27.0",
-    "@next/eslint-plugin-next": "^15.3.2",
-    "@stylistic/eslint-plugin": "^4.2.0",
+    "@biomejs/biome": "^2.1.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.0.1",
     "cross-env": "^7.0.3",
-    "eslint": "^9.27.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "globals": "^16.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "postcss": "^8",
     "react-html-props": "^2.0.3",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5",
-    "typescript-eslint": "^8.32.1"
+    "typescript": "^5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+    "*.{js,jsx,ts,tsx,json}": [
+      "biome check --write --no-errors-on-unmatched"
     ]
   },
   "pnpm": {

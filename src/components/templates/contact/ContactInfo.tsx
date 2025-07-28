@@ -1,46 +1,37 @@
-import React from 'react';
-import Container from '../../Container';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook } from 'react-icons/fa';
+import { FaEnvelope, FaFacebook, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import config from '@/lib/config';
+import Container from '../../Container';
 
 function ContactInfo() {
   return (
     <Container className="p-8 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-2 font-cn">联系我们</h1>
+      <div className="mb-12 text-center">
+        <h1 className="mb-2 font-bold font-cn text-4xl">联系我们</h1>
         <p className="text-gray-600">Contact Us</p>
       </div>
 
       <div className="mb-12">
         {/* Organization Information */}
-        <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl mx-auto">
-          <div className="font-sans mb-6 text-center">
-            <h3 className="text-2xl font-bold text-blue-600 mb-1">
-              马来西亚傅氏总会
-            </h3>
-            <p className="font-semibold">
-              POH ASSOCIATION OF MALAYSIA
-            </p>
-            <p className="text-gray-600">
-              PERSATUAN KETURUNAN POH MALAYSIA
-            </p>
+        <div className="mx-auto max-w-2xl rounded-xl bg-white p-6 shadow-sm">
+          <div className="mb-6 text-center font-sans">
+            <h3 className="mb-1 font-bold text-2xl text-blue-600">马来西亚傅氏总会</h3>
+            <p className="font-semibold">POH ASSOCIATION OF MALAYSIA</p>
+            <p className="text-gray-600">PERSATUAN KETURUNAN POH MALAYSIA</p>
           </div>
 
-          <div className="space-y-4 max-w-md mx-auto">
+          <div className="mx-auto max-w-md space-y-4">
             <div className="flex items-center gap-3">
-              <FaPhone className="text-blue-600 flex-shrink-0" />
+              <FaPhone className="flex-shrink-0 text-blue-600" />
               <p className="text-gray-700">
                 <span className="font-semibold">Contact: </span>
-                {config.phone}
-                {' '}
-                (Eve)
+                {config.phone} (Eve)
               </p>
             </div>
 
             <div className="flex items-center gap-3">
-              <FaEnvelope className="text-blue-600 flex-shrink-0" />
+              <FaEnvelope className="flex-shrink-0 text-blue-600" />
               <p className="text-gray-700">
                 <span className="font-semibold">Email: </span>
                 <a href={`mailto:${config.email}`} className="text-blue-600 hover:underline">
@@ -50,10 +41,14 @@ function ContactInfo() {
             </div>
 
             <div className="flex items-center gap-3">
-              <FaFacebook className="text-blue-600 flex-shrink-0" />
+              <FaFacebook className="flex-shrink-0 text-blue-600" />
               <p className="text-gray-700">
                 <span className="font-semibold">Facebook: </span>
-                <Link href={config.facebookUrl} target="_blank" className="text-blue-600 hover:underline">
+                <Link
+                  href={config.facebookUrl}
+                  target="_blank"
+                  className="text-blue-600 hover:underline"
+                >
                   www.facebook.com
                 </Link>
               </p>
@@ -63,67 +58,76 @@ function ContactInfo() {
       </div>
 
       {/* Office Locations */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
         {/* Current Office Location */}
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Current</div>
-            <h2 className="text-2xl font-bold">Current Office Location</h2>
+        <div className="rounded-xl bg-white p-6 shadow-sm">
+          <div className="mb-6 flex items-center gap-2">
+            <div className="rounded-full bg-blue-100 px-2.5 py-0.5 font-medium text-blue-800 text-xs">
+              Current
+            </div>
+            <h2 className="font-bold text-2xl">Current Office Location</h2>
           </div>
 
-          <div className="flex items-start gap-3 mb-4">
-            <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" />
+          <div className="mb-4 flex items-start gap-3">
+            <FaMapMarkerAlt className="mt-1 flex-shrink-0 text-blue-600" />
             <p className="text-gray-700">
               <span className="font-semibold">Address: </span>
-              <span>No.6B, Jalan SG 1/2, Seri Gombak, Batu Caves, 68100 Selangor D.E, Malaysia.</span>
+              <span>
+                No.6B, Jalan SG 1/2, Seri Gombak, Batu Caves, 68100 Selangor D.E, Malaysia.
+              </span>
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-lg mb-4">
+          <div className="relative mb-4 overflow-hidden rounded-lg">
             <Image
               src="/img/contact/office.jpg"
               alt="办公室"
               width={600}
               height={400}
-              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+              className="h-auto w-full object-cover transition-transform duration-500 hover:scale-105"
             />
           </div>
 
-          <div className="rounded-lg overflow-hidden">
+          <div className="overflow-hidden rounded-lg">
             <iframe
-              className="w-full h-[24rem] focus:outline-none border-0"
+              title="POH Malaysia Office Location Map"
+              className="h-[24rem] w-full border-0 focus:outline-none"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=6,%20Jalan%20SG%201/2,%20Taman%20Sri%20Gombak,%2068100%20Batu%20Caves,%20Selangor,%20Malaysia+(Poh%20Malaysia)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            >
-            </iframe>
+            ></iframe>
           </div>
         </div>
 
         {/* Future Office Location */}
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Coming Soon</div>
-            <h2 className="text-2xl font-bold">Office Location (Upcoming)</h2>
+        <div className="rounded-xl bg-white p-6 shadow-sm">
+          <div className="mb-6 flex items-center gap-2">
+            <div className="rounded-full bg-green-100 px-2.5 py-0.5 font-medium text-green-800 text-xs">
+              Coming Soon
+            </div>
+            <h2 className="font-bold text-2xl">Office Location 🚧</h2>
           </div>
 
-          <div className="flex items-start gap-3 mb-4">
-            <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" />
+          <div className="mb-4 flex items-start gap-3">
+            <FaMapMarkerAlt className="mt-1 flex-shrink-0 text-blue-600" />
             <div className="text-gray-700">
               <span className="font-semibold">Address: </span>
-              <p>Taman Vista Hill, PT 58249, Jalan Mahkota 9, Bander Mahkota Cheras, 43200 Kajang Selangor.</p>
+              <p>
+                Taman Vista Hill, PT 58249, Jalan Mahkota 9, Bander Mahkota Cheras, 43200 Kajang
+                Selangor.
+              </p>
             </div>
           </div>
 
-          <div className="rounded-lg overflow-hidden">
+          <div className="overflow-hidden rounded-lg">
             <iframe
+              title="Alternative POH Malaysia Location Map"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=3.044203,%20101.782777&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-              className="w-full h-[24rem] focus:outline-none border-0"
+              className="h-[24rem] w-full border-0 focus:outline-none"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
-            >
-            </iframe>
+            ></iframe>
           </div>
         </div>
       </div>

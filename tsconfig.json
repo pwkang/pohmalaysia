@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./",
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,12 +19,8 @@
       }
     ],
     "paths": {
-      "@payload-config": [
-        "src/payload.config.ts"
-      ],
-      "@/*": [
-        "src/*"
-      ]
+      "@payload-config": ["src/payload.config.ts"],
+      "@/*": ["src/*"]
     },
     "target": "ES2017"
   },
@@ -38,9 +30,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
-    "migrate.js"  
-],
-  "exclude": [
-    "node_modules"
-  ]
+    "migrate.js"
+  ],
+  "exclude": ["node_modules"]
 }

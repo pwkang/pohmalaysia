@@ -1,5 +1,5 @@
 import { getPayloadClient } from '@/lib/utils';
-import { CommitteePage } from '@/payload-types';
+import type { CommitteePage } from '@/payload-types';
 
 export const fetchBodPage = async (slug: string) => {
   const payload = await getPayloadClient();
@@ -23,7 +23,7 @@ export const fetchBodSlugs = async () => {
     },
   });
 
-  return committeeSlugs.docs.map(page => page.slug) as string[];
+  return committeeSlugs.docs.map((page) => page.slug) as string[];
 };
 
 export const getBodPageMetadata = async (slug: string) => {

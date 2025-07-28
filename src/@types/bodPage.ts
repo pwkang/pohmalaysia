@@ -1,4 +1,4 @@
-import { Member } from './member';
+import type { Member } from './member';
 
 interface Committee {
   title: string;

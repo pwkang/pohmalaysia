@@ -1,4 +1,4 @@
-import { GraphQLClient, RequestDocument } from 'graphql-request';
+import { GraphQLClient, type RequestDocument } from 'graphql-request';
 
 const ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 

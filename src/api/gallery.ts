@@ -1,5 +1,5 @@
 import { getPayloadClient } from '@/lib/utils';
-import { Gallery } from '@/payload-types';
+import type { Gallery } from '@/payload-types';
 
 export const fetchGallery = async (slug: string) => {
   const payload = await getPayloadClient();
@@ -35,7 +35,7 @@ export const fetchGallerySlugs = async () => {
       slug: true,
     },
   });
-  return gallerySlugs.docs.map(gallery => gallery.slug) as string[];
+  return gallerySlugs.docs.map((gallery) => gallery.slug) as string[];
 };
 
 export const listAllGalleries = async () => {

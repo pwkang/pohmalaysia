@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-import dayjs from 'dayjs';
-import Image from 'next/image';
 import * as Dialog from '@radix-ui/react-dialog';
+import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
-import { IoClose, IoChevronBack, IoChevronForward } from 'react-icons/io5';
-import { Media } from '@/payload-types';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { IoChevronBack, IoChevronForward, IoClose } from 'react-icons/io5';
+import type { Media } from '@/payload-types';
 
 // Helper function to get image URL from Media object or string
 export const getImageUrl = (image: string | Media): string => {
@@ -49,27 +49,30 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
   const [preloadedImages, setPreloadedImages] = useState<Record<number, boolean>>({});
 
   // Create refs for each image container to observe visibility
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imageRefs = useRef<(HTMLElement | null)[]>([]);
 
   const handleThumbnailLoad = useCallback((index: number) => {
-    setThumbnailsLoaded(prev => ({ ...prev, [index]: true }));
+    setThumbnailsLoaded((prev) => ({ ...prev, [index]: true }));
   }, []);
 
   const handleOriginalImageLoad = useCallback((index: number) => {
-    setOriginalImagesLoaded(prev => ({ ...prev, [index]: true }));
+    setOriginalImagesLoaded((prev) => ({ ...prev, [index]: true }));
   }, []);
 
   // Preload image function for hover
-  const preloadImage = useCallback((index: number) => {
-    if (preloadedImages[index] || originalImagesLoaded[index]) return;
+  const preloadImage = useCallback(
+    (index: number) => {
+      if (preloadedImages[index] || originalImagesLoaded[index]) return;
 
-    const img = document.createElement('img');
-    img.onload = () => {
-      setPreloadedImages(prev => ({ ...prev, [index]: true }));
-      setOriginalImagesLoaded(prev => ({ ...prev, [index]: true }));
-    };
-    img.src = getImageUrl(images[index]);
-  }, [images, preloadedImages, originalImagesLoaded]);
+      const img = document.createElement('img');
+      img.onload = () => {
+        setPreloadedImages((prev) => ({ ...prev, [index]: true }));
+        setOriginalImagesLoaded((prev) => ({ ...prev, [index]: true }));
+      };
+      img.src = getImageUrl(images[index]);
+    },
+    [images, preloadedImages, originalImagesLoaded],
+  );
 
   // Update modal image loaded state when current image changes or modal opens
   useEffect(() => {
@@ -128,7 +131,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
           if (entry.isIntersecting) {
             // Mark this image as visible
-            setVisibleImages(prev => ({ ...prev, [index]: true }));
+            setVisibleImages((prev) => ({ ...prev, [index]: true }));
             // Once the image is visible, we don't need to observe it anymore
             observer.unobserve(entry.target);
           }
@@ -159,16 +162,15 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
   return (
     <div className="mt-8">
       <h1 className="text-center font-sans">{title}</h1>
-      <p className="text-xs tracking-widest text-center mt-4 uppercase font-bold font-sans">
+      <p className="mt-4 text-center font-bold font-sans text-xs uppercase tracking-widest">
         {dayjs(date).format('DD MMMM YYYY')}
         <span className="mx-2">•</span>
-        {dayjs(date).format('YYYY')}
-        年
+        {dayjs(date).format('YYYY')}年
       </p>
 
-      <div className="max-w-[95%] md:max-w-[90%] w-5xl m-auto mt-8 mb-16">
+      <div className="m-auto mt-8 mb-16 w-5xl max-w-[95%] md:max-w-[90%]">
         {/* Image Grid Gallery - Pinterest Style with Lazy Loading */}
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+        <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-3 lg:columns-4">
           {images.map((image, index) => {
             // Generate a random aspect ratio for Pinterest-like effect
             // This creates a more dynamic, masonry-style layout
@@ -180,30 +182,32 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
             const shouldLoad = index < 4 || visibleImages[index];
 
             return (
-              <div
+              <button
                 key={index}
                 ref={(el) => {
                   imageRefs.current[index] = el;
                 }}
+                type="button"
                 data-index={index}
-                className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group break-inside-avoid mb-4"
+                className="group relative mb-4 w-full cursor-pointer break-inside-avoid overflow-hidden rounded-lg border-0 bg-transparent p-0 shadow-md transition-all duration-300 hover:shadow-lg"
                 onMouseEnter={() => preloadImage(index)}
                 onClick={() => {
                   setCurrentImage(index);
                   setModalOpen(true);
                 }}
+                aria-label={`View image ${index + 1}`}
               >
                 <div className="relative w-full" style={{ paddingTop }}>
                   {/* Show a placeholder while no image is loaded */}
                   {!thumbnailsLoaded[index] && !shouldLoad && (
-                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                    <div className="absolute inset-0 animate-pulse bg-gray-200" />
                   )}
 
                   {/* Show thumbnail first */}
                   <Image
                     src={getThumbnailUrl(image)}
                     alt={`Thumbnail ${index + 1}`}
-                    className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-0' : 'opacity-100'}`}
+                    className={`transition-all duration-300 group-hover:scale-105 ${originalImagesLoaded[index] ? 'opacity-0' : 'opacity-100'}`}
                     fill
                     onLoad={() => handleThumbnailLoad(index)}
                     priority={index < 8} // Prioritize loading more thumbnails since they're smaller
@@ -216,7 +220,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     <Image
                       src={getImageUrl(image)}
                       alt={`Image ${index + 1}`}
-                      className={`group-hover:scale-105 transition-all duration-300 ${originalImagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
+                      className={`transition-all duration-300 group-hover:scale-105 ${originalImagesLoaded[index] ? 'opacity-100' : 'opacity-0'}`}
                       fill
                       onLoad={() => handleOriginalImageLoad(index)}
                       priority={index < 4} // Prioritize loading only the first 4 original images
@@ -225,7 +229,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     />
                   )}
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -239,31 +243,32 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 z-50"
+              className="fixed inset-0 z-50 bg-black/90"
             >
-              <div
-                className="h-screen flex flex-col items-center justify-center p-4"
-                onClick={() => setModalOpen(false)} // Close when clicking outside the image
-              >
+              <div className="flex h-screen flex-col items-center justify-center p-4">
                 <div
                   className="relative w-full max-w-4xl"
-                  onClick={e => e.stopPropagation()} // Prevent closing when clicking on the image
+                  onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+                  onKeyDown={(e) => e.stopPropagation()}
+                  role="dialog"
+                  aria-modal="true"
                 >
                   {/* Close button positioned relative to the image */}
                   <button
+                    type="button"
                     onClick={() => setModalOpen(false)}
-                    className="absolute right-3 top-3 z-20 bg-black/60 text-white p-1.5 rounded-full hover:bg-black/80 shadow-md"
+                    className="absolute top-3 right-3 z-20 rounded-full bg-black/60 p-1.5 text-white shadow-md hover:bg-black/80"
                     aria-label="Close modal"
                   >
                     <IoClose size={24} />
                   </button>
                   {/* Progressive loading for modal image */}
-                  <div className="relative w-full flex justify-center items-center min-h-[60vh]">
+                  <div className="relative flex min-h-[60vh] w-full items-center justify-center">
                     {/* Loading placeholder while image loads */}
                     {!modalImageLoaded && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-gray-800/20 rounded-lg p-8">
-                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                        <div className="rounded-lg bg-gray-800/20 p-8">
+                          <div className="h-8 w-8 animate-spin rounded-full border-white border-b-2"></div>
                         </div>
                       </div>
                     )}
@@ -273,7 +278,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                       <Image
                         src={getThumbnailUrl(images[currentImage])}
                         alt={`Thumbnail ${currentImage + 1}`}
-                        className="max-h-[80vh] w-auto transition-all duration-300 blur-sm"
+                        className="max-h-[80vh] w-auto blur-sm transition-all duration-300"
                         width={1280}
                         height={720}
                         priority={true}
@@ -291,7 +296,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                       onLoad={() => {
                         // Update both modal state and grid state
                         setModalImageLoaded(true);
-                        setOriginalImagesLoaded(prev => ({ ...prev, [currentImage]: true }));
+                        setOriginalImagesLoaded((prev) => ({ ...prev, [currentImage]: true }));
                       }}
                       quality={90} /* Higher quality for modal view */
                       priority={true} /* Always prioritize the modal image */
@@ -301,10 +306,14 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
 
                   {/* Modal Navigation Controls */}
                   <div
-                    className="absolute inset-x-0 bottom-0 flex justify-between items-center p-2 sm:p-4"
-                    onClick={e => e.stopPropagation()} // Prevent closing when clicking on navigation controls
+                    className="absolute inset-x-0 bottom-0 flex items-center justify-between p-2 sm:p-4"
+                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on navigation controls
+                    onKeyDown={(e) => e.stopPropagation()}
+                    role="toolbar"
+                    aria-label="Image navigation"
                   >
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         const prevImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
@@ -312,20 +321,18 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                         // Preload the previous image for smoother navigation
                         preloadImage(prevImage);
                       }}
-                      className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
+                      className="rounded-full bg-black/50 p-2 text-white hover:bg-black/70"
                       aria-label="Previous image"
                     >
                       <IoChevronBack size={24} />
                     </button>
 
-                    <div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-                      {currentImage + 1}
-                      {' '}
-                      /
-                      {images.length}
+                    <div className="rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+                      {currentImage + 1} /{images.length}
                     </div>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         const nextImage = currentImage === images.length - 1 ? 0 : currentImage + 1;
@@ -333,7 +340,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                         // Preload the next image for smoother navigation
                         preloadImage(nextImage);
                       }}
-                      className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
+                      className="rounded-full bg-black/50 p-2 text-white hover:bg-black/70"
                       aria-label="Next image"
                     >
                       <IoChevronForward size={24} />

@@ -1,8 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { AnimatePresence, motion, MotionProps } from 'framer-motion';
-import { ReactNode, useMemo } from 'react';
-import { DivPropsWithoutRef } from 'react-html-props';
 import cn from 'classnames';
+import { AnimatePresence, type MotionProps, motion } from 'framer-motion';
+import { type ReactNode, useMemo } from 'react';
+import type { DivPropsWithoutRef } from 'react-html-props';
 
 type Placement = 'top' | 'right' | 'bottom' | 'left';
 
@@ -23,8 +23,7 @@ type PlacementFn = ({
   height?: string | number;
 }) => MotionProps & DivPropsWithoutRef;
 
-const commonClassname
-  = 'fixed z-50 bg-white drop-shadow-lg max-h-screen max-w-full';
+const commonClassname = 'fixed z-50 bg-white drop-shadow-lg max-h-screen max-w-full';
 
 const PLACEMENTS_MAP: Record<Placement, PlacementFn> = {
   top: ({ height }) => ({
@@ -70,14 +69,7 @@ const PLACEMENTS_MAP: Record<Placement, PlacementFn> = {
 } as const;
 
 const Drawer = (props: DrawerProps) => {
-  const {
-    onClose,
-    open,
-    placement = 'right',
-    width = 256,
-    height = 400,
-    children,
-  } = props;
+  const { onClose, open, placement = 'right', width = 256, height = 400, children } = props;
 
   const motionProps: MotionProps & DivPropsWithoutRef = useMemo(() => {
     return PLACEMENTS_MAP[placement]({ width, height });
@@ -93,7 +85,7 @@ const Drawer = (props: DrawerProps) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="z-50 fixed inset-0 bg-black/50"
+                className="fixed inset-0 z-50 bg-black/50"
               />
             </Dialog.Overlay>
             <Dialog.Content>

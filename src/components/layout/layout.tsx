@@ -1,7 +1,7 @@
-import React from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
 import { Montserrat } from 'next/font/google';
+import type React from 'react';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 // Define the Montserrat font with specific subsets
 const montserrat = Montserrat({
@@ -16,7 +16,7 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div className={`flex flex-col min-h-screen ${montserrat.variable} font-sans`}>
+    <div className={`flex min-h-screen flex-col ${montserrat.variable} font-sans`}>
       <Navbar />
       <main className="flex-grow">{children}</main>
       <Footer />

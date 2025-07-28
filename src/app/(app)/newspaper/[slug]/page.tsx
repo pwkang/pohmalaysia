@@ -1,10 +1,8 @@
-import React from 'react';
+import type { Metadata } from 'next';
 import Layout from '@/components/layout/layout';
-import { Metadata } from 'next';
-import { defaultMetadata } from '@/lib//default-metadata';
-import { newspaper } from '@/components/templates/newspaper/newspaper';
-import HeroSlider from '@/components/layout/HeroSlider';
 import NewspaperPage from '@/components/templates/newspaper/NewspaperPage';
+import { newspaper } from '@/components/templates/newspaper/newspaper';
+import { defaultMetadata } from '@/lib//default-metadata';
 
 interface Props {
   params: {
@@ -13,7 +11,7 @@ interface Props {
 }
 
 function Page({ params: { slug } }: Props) {
-  const news = newspaper.find(event => event.slug === slug);
+  const news = newspaper.find((event) => event.slug === slug);
 
   if (!news) {
     return <Layout>Event not found</Layout>;
@@ -21,20 +19,19 @@ function Page({ params: { slug } }: Props) {
 
   return (
     <Layout>
-      <HeroSlider />
       <NewspaperPage newspaper={news} />
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  return newspaper.map(event => ({
+  return newspaper.map((event) => ({
     slug: event.slug,
   }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const news = newspaper.find(event => event.slug === params.slug);
+  const news = newspaper.find((event) => event.slug === params.slug);
 
   return {
     ...defaultMetadata,
