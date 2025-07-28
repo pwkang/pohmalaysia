@@ -90,6 +90,7 @@ function ContactInfo() {
 
           <div className="overflow-hidden rounded-lg">
             <iframe
+              title="POH Malaysia Office Location Map"
               className="h-[24rem] w-full border-0 focus:outline-none"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=6,%20Jalan%20SG%201/2,%20Taman%20Sri%20Gombak,%2068100%20Batu%20Caves,%20Selangor,%20Malaysia+(Poh%20Malaysia)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               loading="lazy"
@@ -120,6 +121,7 @@ function ContactInfo() {
 
           <div className="overflow-hidden rounded-lg">
             <iframe
+              title="Alternative POH Malaysia Location Map"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=3.044203,%20101.782777&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               className="h-[24rem] w-full border-0 focus:outline-none"
               loading="lazy"

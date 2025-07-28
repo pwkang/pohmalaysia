@@ -49,7 +49,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
   const [preloadedImages, setPreloadedImages] = useState<Record<number, boolean>>({});
 
   // Create refs for each image container to observe visibility
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imageRefs = useRef<(HTMLElement | null)[]>([]);
 
   const handleThumbnailLoad = useCallback((index: number) => {
     setThumbnailsLoaded((prev) => ({ ...prev, [index]: true }));
@@ -182,18 +182,20 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
             const shouldLoad = index < 4 || visibleImages[index];
 
             return (
-              <div
+              <button
                 key={index}
                 ref={(el) => {
                   imageRefs.current[index] = el;
                 }}
+                type="button"
                 data-index={index}
-                className="group relative mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+                className="group relative mb-4 w-full cursor-pointer break-inside-avoid overflow-hidden rounded-lg border-0 bg-transparent p-0 shadow-md transition-all duration-300 hover:shadow-lg"
                 onMouseEnter={() => preloadImage(index)}
                 onClick={() => {
                   setCurrentImage(index);
                   setModalOpen(true);
                 }}
+                aria-label={`View image ${index + 1}`}
               >
                 <div className="relative w-full" style={{ paddingTop }}>
                   {/* Show a placeholder while no image is loaded */}
@@ -227,7 +229,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     />
                   )}
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -243,16 +245,17 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 bg-black/90"
             >
-              <div
-                className="flex h-screen flex-col items-center justify-center p-4"
-                onClick={() => setModalOpen(false)} // Close when clicking outside the image
-              >
+              <div className="flex h-screen flex-col items-center justify-center p-4">
                 <div
                   className="relative w-full max-w-4xl"
                   onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+                  onKeyDown={(e) => e.stopPropagation()}
+                  role="dialog"
+                  aria-modal="true"
                 >
                   {/* Close button positioned relative to the image */}
                   <button
+                    type="button"
                     onClick={() => setModalOpen(false)}
                     className="absolute top-3 right-3 z-20 rounded-full bg-black/60 p-1.5 text-white shadow-md hover:bg-black/80"
                     aria-label="Close modal"
@@ -305,8 +308,12 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                   <div
                     className="absolute inset-x-0 bottom-0 flex items-center justify-between p-2 sm:p-4"
                     onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on navigation controls
+                    onKeyDown={(e) => e.stopPropagation()}
+                    role="toolbar"
+                    aria-label="Image navigation"
                   >
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         const prevImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
@@ -325,6 +332,7 @@ function GalleryImages({ title, images, date }: GalleryImagesProps) {
                     </div>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         const nextImage = currentImage === images.length - 1 ? 0 : currentImage + 1;

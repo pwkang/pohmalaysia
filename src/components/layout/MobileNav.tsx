@@ -86,6 +86,7 @@ function MobileNav() {
   return (
     <>
       <button
+        type="button"
         className="rounded-full bg-gray-100 p-2 text-blue-700 transition-all duration-300 hover:bg-gray-200"
         onClick={toggle}
         aria-label="Menu"
@@ -129,6 +130,7 @@ function MobileNav() {
                       </div>
                     </div>
                     <button
+                      type="button"
                       className="rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
                       onClick={() => setIsOpen(false)}
                       aria-label="Close menu"

@@ -24,7 +24,7 @@ async function BodListing({ slug }: BodListingProps) {
     return avatar.alt || name;
   };
 
-  if (!currentCommittee) return <></>;
+  if (!currentCommittee) return null;
 
   return (
     <Container className="mt-8 px-4 py-10">

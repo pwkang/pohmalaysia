@@ -63,7 +63,8 @@
       "linter": {
         "rules": {
           "a11y": {
-            "useKeyWithClickEvents": "warn"
+            "useKeyWithClickEvents": "warn",
+            "useSemanticElements": "warn"
           }
         }
       }
@@ -74,6 +75,16 @@
         "rules": {
           "suspicious": {
             "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/payload-types.ts"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noBannedTypes": "off"
           }
         }
       }
