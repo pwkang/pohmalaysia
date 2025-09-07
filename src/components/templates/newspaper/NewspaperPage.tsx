@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import type { Newspaper } from './newspaper';
+import { getImageUrl } from '@/lib/utils';
+import type { Newspaper } from '@/payload-types';
 
 interface NewspaperPageProps {
   newspaper: Newspaper;
@@ -17,10 +18,10 @@ function NewspaperPage({ newspaper }: NewspaperPageProps) {
       </p>
       <div className="mt-8 flex justify-center">
         <Image
-          src={`/img/newspaper/${newspaper.slug}.jpg`}
+          src={getImageUrl(newspaper.image)}
           alt={newspaper.title}
-          width={newspaper.imageWidth}
-          height={newspaper.imageHeight}
+          width={newspaper.image.width}
+          height={newspaper.image.height}
           className="max-h-[64rem] w-full object-contain"
         />
       </div>
