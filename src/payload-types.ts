@@ -74,6 +74,7 @@ export interface Config {
     roles: Role;
     'committee-page': CommitteePage;
     gallery: Gallery;
+    newspapers: Newspaper;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     roles: RolesSelect<false> | RolesSelect<true>;
     'committee-page': CommitteePageSelect<false> | CommitteePageSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
+    newspapers: NewspapersSelect<false> | NewspapersSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents':
       | PayloadLockedDocumentsSelect<false>
@@ -301,6 +303,21 @@ export interface Gallery {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newspapers".
+ */
+export interface Newspaper {
+  id: string;
+  slug: string;
+  title: string;
+  date: string;
+  image: string | Media;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -333,6 +350,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'gallery';
         value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'newspapers';
+        value: string | Newspaper;
       } | null)
     | ({
         relationTo: 'payload-folders';
@@ -520,6 +541,20 @@ export interface GallerySelect<T extends boolean = true> {
   metaTitle?: T;
   metaDescription?: T;
   thumbnail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newspapers_select".
+ */
+export interface NewspapersSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  date?: T;
+  image?: T;
+  metaTitle?: T;
+  metaDescription?: T;
   updatedAt?: T;
   createdAt?: T;
 }

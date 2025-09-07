@@ -17,6 +17,7 @@ import { CommitteePage } from './collections/Committee-page';
 import { Gallery } from './collections/Gallery';
 import { Media } from './collections/Media';
 import { Member } from './collections/Member';
+import { Newspaper } from './collections/newspaper';
 import { Role } from './collections/Role';
 import { Users } from './collections/Users';
 
@@ -30,7 +31,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Member, Committee, Role, CommitteePage, Gallery],
+  collections: [Users, Media, Member, Committee, Role, CommitteePage, Gallery, Newspaper],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
